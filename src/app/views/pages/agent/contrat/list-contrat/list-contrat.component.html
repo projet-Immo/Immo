@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin mb-1 mt-3 ms-3 me-3">
+    <!-- Breadcrumb à gauche -->
+    <nav class="page-breadcrumb cursor-pointer">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item active"><a>Liste des contrats</a></li>
+        </ol>
+    </nav>
+
+    <!-- Boutons à droite -->
+    <div class="d-flex justify-content-end align-items-center gap-2">
+        <button type="button" class="btn btn-secondary btn-icon me-2" (click)="openAddContrat(SearchContratModal)">
+            <i class="feather icon-search"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-icon-text d-flex justify-content-end align-items-center gap-2" (click)="openAddContrat(addContratModal)">
+            Nouveau contrat <i class="feather icon-plus-circle"></i> 
+        </button>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-body p-0">
+        <section class="table-container mat-elevation-z8" tabindex="0">
+            <table mat-table [dataSource]="dataSource?.payload">
+                
+                <ng-container matColumnDef="typeContrat">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text" style="min-width:100px;">
+                        Type Contrat</th>
+                    <td mat-cell *matCellDef="let contrat" class="text-left"> {{contrat?.typeContrat?.description}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dateDebut">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center" style="min-width:100px;">
+                        Date début </th>
+                    <td mat-cell *matCellDef="let contrat" class="text-center"> {{contrat?.dateDebut | date:'dd/MM/yyyy'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dateFin">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center" style="min-width:100px;">
+                        Date fin </th>
+                    <td mat-cell *matCellDef="let contrat" class="text-center"> {{contrat?.dateFin | date:'dd/MM/yyyy'}}  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="statusContrat">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text" style="min-width:100px;"> status Contrat </th>
+                    <td mat-cell *matCellDef="let contrat" class="text-left"> {{contrat?.statusContrat?.description}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="agent">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center" style="min-width:100px;">
+                        Agent </th>
+                    <td mat-cell *matCellDef="let contrat" class="text-center"> {{agentNomComplet}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text" style="min-width:0px;">
+                        Actions </th>
+                    <td mat-cell *matCellDef="let contrat">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="openEditContrat(EditContratModal, contrat)">
+                                <mat-icon>edit</mat-icon>
+                                <span>Modifier</span>
+                            </button>
+                            <button mat-menu-item (click)="deleteContrat(contrat)">
+                                <mat-icon>delete</mat-icon>
+                                <span>Supprimer</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-head-bg"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+
+            <span *ngIf="dataSource?.payload?.length == 0" class="paginate text-danger mt-4">Les critères de recherche
+                tels qu'énoncés ne correspondent à aucun contrat</span>
+
+            <div class="paginate">
+                <ngb-pagination [collectionSize]="dataSource?.metadata?.totalElements" [page]="pageOptions.page+1"
+                    [pageSize]="pageOptions.size" [maxSize]="5" (pageChange)="paginate($event)" size="sm"
+                    [rotate]="true" [ellipses]="true" [boundaryLinks]="true">
+                </ngb-pagination>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- search contrat -->
+<ng-template #SearchContratModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Recherche Contrat</h5>
+        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <app-add-contrat (search)="doSearch($event)" [agentId]=agentId [isSearch]="true" (submit)="close()"></app-add-contrat>
+    </div>
+</ng-template>
+
+<!--Add contrat-->
+<ng-template #addContratModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajout Contrat</h5>
+        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <app-add-contrat [isSearch]="false" [agentId]=agentId (submit)="close()"></app-add-contrat>
+    </div>
+</ng-template>
+
+<!--Edit contrat-->
+<ng-template #EditContratModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier Contrat</h5>
+        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <app-edit-contrat [agentId]=agentId (submit)="close()" [contratToUpdate]="contratToUpdate"></app-edit-contrat>
+    </div>
+</ng-template>
