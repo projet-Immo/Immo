@@ -28,12 +28,15 @@ import { ErrorPageComponent } from './views/pages/error-page/error-page.componen
 
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { PipeModule } from './util/pipe/pipe.module';
+import { ObjectifListeComponent } from './views/pages/rse/Objestif/objectif-liste/objectif-liste.component';
+import { ObjectifAddComponent } from './views/pages/rse/Objestif/objectif-add/objectif-add.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorPageComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { PipeModule } from './util/pipe/pipe.module';
     MatMenuModule,
     MatTableModule,
     MatIconModule,
+    
   ],
   providers: [
     AuthGuard,
