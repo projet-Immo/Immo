@@ -41,20 +41,37 @@ export class AddProjetComponent {
   }
 
   initForm(){
-    this.form = new FormGroup(
-      {
-        name: new FormControl("", Validators.required),
-        chef_projet: new FormControl("", Validators.required),
-        description: new FormControl(""),
-        budget_previsionnel: new FormControl("", Validators.required),
-        statut_projet: new FormControl("",),
-        pilier_rse: new FormControl("",Validators.required),
-        dateDebutPrevu: new FormControl("",Validators.required),
-        dateFinPrevu: new FormControl("",Validators.required),
-        dateDebutReel: new FormControl(""),
-        dateFinReel: new FormControl(""),
-      }
-    );
+    if (this.isSearch) {
+      this.form = new FormGroup(
+        {
+          name: new FormControl("", Validators.required),
+          chef_projet: new FormControl("", Validators.required),
+          description: new FormControl(""),
+          budget_previsionnel: new FormControl("", Validators.required),
+          statut_projet: new FormControl("",),
+          pilier_rse: new FormControl("",Validators.required),
+          dateDebutPrevu: new FormControl("",Validators.required),
+          dateFinPrevu: new FormControl("",Validators.required),
+          dateDebutReel: new FormControl(""),
+          dateFinReel: new FormControl(""),
+        }
+      );
+    }else{
+      this.form = new FormGroup(
+        {
+          name: new FormControl(""),
+          chef_projet: new FormControl(""),
+          description: new FormControl(""),
+          budget_previsionnel: new FormControl("0"),
+          statut_projet: new FormControl(),
+          pilier_rse: new FormControl(),
+          dateDebutPrevu: new FormControl(""),
+          dateFinPrevu: new FormControl(""),
+          dateDebutReel: new FormControl(""),
+          dateFinReel: new FormControl(""),
+        }
+      );
+    }
   }
 
   create() {

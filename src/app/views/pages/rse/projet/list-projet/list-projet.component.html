@@ -111,7 +111,7 @@
 <!-- search projet -->
 <ng-template #SearchProjetModal let-modal>
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Recherche Projet</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Rechercher des Projets</h5>
         <button type="button" class="btn-close"  (click)="modal.close('by: close icon')" aria-label="Close"></button>
     </div>
     <div class="modal-body">
@@ -133,15 +133,13 @@
 <!--End Add projet-->
 
 <!--Edit projet-->
-<ng-template #EditProjetModal let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier Projet</h5>
-        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-        <!-- <app-edit-projet  (submit)="close()"[projetToUpdate]="projetToUpdate"></app-edit-projet> -->
-    </div> 
-</ng-template>
+    <ng-template #EditProjetModal let-modal>
+        <div class="modal-header bg-special">
+            <h5 class="modal-title" id="exampleModalLabel">Modifier un Projet</h5>
+            <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
+        </div>
+        <div class="modal-body">
+            <app-edit-projet  (submit)="close()"[projetToUpdate]="projetToUpdate"></app-edit-projet>
+        </div> 
+    </ng-template>
 <!--End Edit projet-->
-<ng-container>
-</ng-container>
