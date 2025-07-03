@@ -12,7 +12,7 @@
         <button type="button" class="btn btn-secondary btn-icon me-2" (click)="openAddProjet(SearchProjetModal)">
             <i class="feather icon-search"></i>
         </button>
-        <button type="button" class="btn btn-primary bg-special btn-icon-text d-flex align-items-center gap-2" (click)="openAddProjet(addProjetModal)">
+        <button type="button" class="btn border-0 btn-primary bg-special btn-icon-text d-flex align-items-center gap-2" (click)="openAddProjet(addProjetModal)">
             <i class="feather icon-plus-circle"></i> Nouveau projet
         </button>
     </div>
@@ -80,10 +80,6 @@
                             <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                            <button mat-menu-item>
-                                <mat-icon fontIcon="visibility"></mat-icon>
-                                <span>Details</span>
-                            </button>
                             <button mat-menu-item (click)="openEditProjet(EditProjetModal, projet)">
                                 <mat-icon>edit</mat-icon>
                                 <span>Modifier</span>
@@ -127,8 +123,8 @@
 <!--Add projet-->
 <ng-template #addProjetModal let-modal>
     <div class="modal-header bg-special">
-        <h5 class="modal-title" id="exampleModalLabel">Ajout Projet</h5>
-        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">Ajout d'un Projet</h5>
+        <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
     </div>
     <div class="modal-body">
         <app-add-projet [isSearch]="false" (submit)="close()"></app-add-projet>
