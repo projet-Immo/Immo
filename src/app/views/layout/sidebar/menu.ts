@@ -4,7 +4,7 @@ export const MENU: MenuItem[] = [
   {
     label: 'Tableau de bord',
     icon: 'home',
-    link: '/admin/rse'
+    link: '/admin/dashboard'
   },
   {
     label: 'RSE',
@@ -12,12 +12,12 @@ export const MENU: MenuItem[] = [
   },
   {
     label: 'Projets',
-    icon: 'user',
+    icon: 'briefcase',
     link: '/admin/rse/projets'
   },
   {
     label: 'Objectifs',
-    icon: 'users',
+    icon: 'target',
     link: '/admin/rse/objectifs'
   },
   {
@@ -31,17 +31,17 @@ export const MENU: MenuItem[] = [
   },
   {
     label: 'Candidats',
-    icon: 'users',
+    icon: 'user-check',
     link: '/admin/election/candidats'
   },
   {
     label: 'Employes',
-    icon: 'users',
+    icon: 'user',
     link: '/admin/election/employes'
   },
   {
     label: 'Service',
-    icon: 'building',
+    icon: 'settings',
     link: '/admin/election/services'
   },
 ];

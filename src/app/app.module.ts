@@ -28,6 +28,7 @@ import { ErrorPageComponent } from './views/pages/error-page/error-page.componen
 
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { PipeModule } from './util/pipe/pipe.module';
+import { ControleModule } from './views/pages/controle/controle.module';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { PipeModule } from './util/pipe/pipe.module';
     MatMenuModule,
     MatTableModule,
     MatIconModule,
+    ControleModule
   ],
   providers: [
     AuthGuard,

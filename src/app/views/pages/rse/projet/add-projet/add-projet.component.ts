@@ -41,7 +41,7 @@ export class AddProjetComponent {
   }
 
   initForm(){
-    if (this.isSearch) {
+    if (!this.isSearch) {
       this.form = new FormGroup(
         {
           name: new FormControl("", Validators.required),
@@ -61,14 +61,12 @@ export class AddProjetComponent {
         {
           name: new FormControl(""),
           chef_projet: new FormControl(""),
-          description: new FormControl(""),
-          budget_previsionnel: new FormControl("0"),
           statut_projet: new FormControl(),
           pilier_rse: new FormControl(),
           dateDebutPrevu: new FormControl(""),
           dateFinPrevu: new FormControl(""),
           dateDebutReel: new FormControl(""),
-          dateFinReel: new FormControl(""),
+          dateFinReel: new FormControl("")
         }
       );
     }
