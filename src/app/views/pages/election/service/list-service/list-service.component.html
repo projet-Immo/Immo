@@ -1,0 +1,123 @@
+<div class="row flex-wrap grid-margin mb-1 align-items-start">
+
+    <!-- Breadcrumb à gauche -->
+    <nav class="page-breadcrumb gap-2 d-flex flex-column mb-4 col-md-6">
+        <h2>Departements</h2>
+        <p>L'ensemble des departements de l'entreprise</p>
+    </nav>
+
+
+    <!-- Boutons à droite -->
+    <div class="d-flex justify-content-end align-items-center gap-2 col-md-6">
+        <button type="button" class="btn btn-secondary btn-icon me-2" (click)="openAddService(SearchServiceModal)">
+            <i class="feather icon-search"></i>
+        </button>
+        <button type="button" class="btn border-0 btn-primary bg-special btn-icon-text d-flex align-items-center gap-2" (click)="openAddService(addServiceModal)">
+            <i class="feather icon-plus-circle"></i> Nouveau service
+        </button>
+    </div>
+
+</div>
+
+<div class="card mt-4" style="width: 100%;">
+    <div class="card-body p-0" style="width: 100%;">
+        <section class="table-container" tabindex="0" style="width: 100%; overflow-x: auto;">
+            <!-- <app-spinner *ngIf="loadingIndicator" [displayedColumns]="displayedColumns"></app-spinner> -->
+
+            <table mat-table [dataSource]="dataSource?.payload" class="w-100">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text bg-special" style="min-width:100px;"> Nom du departement </th>
+                    <td mat-cell *matCellDef="let service" class="text-left"> {{service?.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text bg-special" style="min-width:100px;">
+                        Description </th>
+                    <td mat-cell *matCellDef="let service" class="text-left"> <span>{{service?.description}} </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nbrEmploe">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
+                        Nbr employes </th>
+                    <td mat-cell *matCellDef="let service" class="text-center"> {{service?.nbrEmploe}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="date_creation">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
+                        date de creation </th>
+                    <td mat-cell *matCellDef="let service" class="text-center"> {{service?.date_creation}} </td>
+                </ng-container>
+
+                <!-- <app-list-contrat></app-list-contrat> -->
+                <ng-container matColumnDef="actions" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text bg-special" style="min-width:0px;">
+                        Actions </th>
+                    <td mat-cell *matCellDef="let service">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="openEditService(EditServiceModal, service)">
+                                <mat-icon>edit</mat-icon>
+                                <span>Modifier</span>
+                            </button>
+                            <button mat-menu-item (click)="deleteService(service.id)">
+                                <mat-icon>delete</mat-icon>
+                                <span>Supprimer</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-head-bg"></tr>
+                <tr mat-row *matRowDef="let emprow; columns: displayedColumns"></tr>
+            </table>
+
+            <span *ngIf="dataSource?.payload?.length == 0" class="paginate text-danger mt-4">Les critères de recherche
+                tels qu'énoncés ne correspondent à aucun service</span>
+
+            <div class="paginate">
+                <ngb-pagination [collectionSize]="dataSource?.metadata?.totalElements" [page]="pageOptions.page+1"
+                    [pageSize]="pageOptions.size" [maxSize]="5" (pageChange)="paginate($event)" size="sm"
+                    [rotate]="true" [ellipses]="true" [boundaryLinks]="true">
+                </ngb-pagination>
+            </div>
+        </section>
+    </div>
+</div>
+<!-- search service -->
+<ng-template #SearchServiceModal let-modal>
+    <div class="modal-header bg-special">
+        <h5 class="modal-title" id="exampleModalLabel">Rechercher des Services</h5>
+        <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
+    </div>
+    <div class="modal-body">
+        <app-add-service (search)="doSearch($event)" [isSearch]="true" (submit)="close()"></app-add-service>
+    </div>
+</ng-template>
+<!-- search service -->
+
+<!--Add service-->
+<ng-template #addServiceModal let-modal>
+    <div class="modal-header bg-special">
+        <h5 class="modal-title" id="exampleModalLabel">Ajout d'un Service</h5>
+        <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
+    </div>
+    <div class="modal-body">
+        <app-add-service [isSearch]="false" (submit)="close()"></app-add-service>
+    </div>
+</ng-template>
+<!--End Add service-->
+
+<!--Edit service-->
+    <ng-template #EditServiceModal let-modal>
+        <div class="modal-header bg-special">
+            <h5 class="modal-title" id="exampleModalLabel">Modifier un Service</h5>
+            <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
+        </div>
+        <div class="modal-body">
+            <app-edit-service  (submit)="close()"[serviceToUpdate]="serviceToUpdate"></app-edit-service>
+        </div> 
+    </ng-template>
+<!--End Edit service-->

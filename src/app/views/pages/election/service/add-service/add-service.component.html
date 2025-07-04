@@ -1,0 +1,53 @@
+<section *ngIf="!isSearch">   
+    <form [formGroup]="form">
+      <div class="row">
+            <div class="col-sm-6">
+                <div class="mb-3"> 
+                    <label for="nom" class="form-label">Nom du service<small style="color: red;">*</small></label>
+                    <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom du service" formControlName="name">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="date_creation" class="form-label">Date de creation<small style="color: red;">*</small></label>
+                <input type="date" class="form-control form-control-lg" id="date_creation" placeholder="date de debut prevu" formControlName="date_creation">
+            </div>
+        </div>
+        
+        <div class="col-sm-12">
+            <div class="mb-3">
+              <label for="desc" class="form-label">Description du service</label>
+              <textarea id="desc"  class="form-control form-control-lg" placeholder="Decrivez le service ici..." formControlName="description"></textarea>
+            </div>
+        </div>
+    </form>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="create()" [disabled]="!form.valid">Enregistrer</button>
+    </div>
+</section>
+
+<section *ngIf="isSearch">   
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="row">
+              <div class="col-sm-6">
+                  <div class="mb-3"> 
+                      <label for="nom" class="form-label">Nom du service<small style="color: red;">*</small></label>
+                      <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom du service" formControlName="name">
+                  </div>
+              </div>
+              <div class="col-sm-6">
+                  <label for="date_creation" class="form-label">Date de creation<small style="color: red;">*</small></label>
+                  <input type="date" class="form-control form-control-lg" id="date_creation" placeholder="date de debut prevu" formControlName="date_creation">
+              </div>
+          </div>
+  
+      </div>
+    </form>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+        <button type="button" class="btn btn-primary" (click)="doSearch()">Rechercher</button>
+    </div>
+</section>
+  

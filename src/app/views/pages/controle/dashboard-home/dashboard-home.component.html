@@ -1,0 +1,126 @@
+
+<div class="row flex-wrap grid-margin mb-1 align-items-start">
+
+    <!-- Breadcrumb à gauche -->
+    <nav class="page-breadcrumb gap-2 d-flex flex-column mb-4 col-md-6">
+        <h2>Bienvenue sur <strong>Smart</strong>Legal</h2>
+        <p>Le logiciel qui facilite la reglementation des entreprises</p>
+    </nav>
+
+</div>
+
+  
+  <div class="d-flex">
+    <!-- Main content -->
+    <div class="flex-grow-1">
+      <!-- Dashboard content -->
+      <div class="content">
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <i data-feather="users" class="me-3 text-primary" style="width:32px;height:32px;"></i>
+                  <div>
+                    <div class="fs-4 fw-bold">128</div>
+                    <div class="text-muted">Employés</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <i data-feather="briefcase" class="me-3 text-success" style="width:32px;height:32px;"></i>
+                  <div>
+                    <div class="fs-4 fw-bold">12</div>
+                    <div class="text-muted">Projets</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <i data-feather="target" class="me-3 text-warning" style="width:32px;height:32px;"></i>
+                  <div>
+                    <div class="fs-4 fw-bold">7</div>
+                    <div class="text-muted">Objectifs</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <i data-feather="user-check" class="me-3 text-info" style="width:32px;height:32px;"></i>
+                  <div>
+                    <div class="fs-4 fw-bold">4</div>
+                    <div class="text-muted">Candidats</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="card mt-4" style="width: 100%;">
+    <h5 class="pt-3 pb-3 ps-2">Dernières activités</h5>
+    <div class="card-body p-0" style="width: 100%;">
+        <section class="table-container" tabindex="0" style="width: 100%; overflow-x: auto;">
+            <!-- <app-spinner *ngIf="loadingIndicator" [displayedColumns]="displayedColumns"></app-spinner> -->
+
+            <table mat-table [dataSource]="dataSource?.payload" class="w-100">
+                <ng-container matColumnDef="intitule">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text bg-special" style="min-width:100px;"> INTITULE </th>
+                    <td mat-cell *matCellDef="let activity" class="text-left"> {{activity?.intitule}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text bg-special" style="min-width:100px;">
+                        TYPE </th>
+                    <td mat-cell *matCellDef="let activity" class="text-left"> <span>{{activity?.type}} </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text bg-special" style="min-width:100px;">
+                        DATE </th>
+                    <td mat-cell *matCellDef="let activity" class="text-left"> <span>{{activity?.dateActivite}} </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text bg-special" style="min-width:100px;">
+                        STATUS </th>
+                    <td mat-cell *matCellDef="let activity" class="text-left"> <span>{{activity?.status}} </span>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-head-bg"></tr>
+                <tr mat-row *matRowDef="let emprow; columns: displayedColumns"></tr>
+            </table>
+
+            <span *ngIf="dataSource?.payload?.length == 0" class="paginate text-danger mt-4">Les critères de recherche
+                tels qu'énoncés ne correspondent à aucun activity</span>
+
+            <div class="paginate">
+                <ngb-pagination [collectionSize]="dataSource?.metadata?.totalElements" [page]="pageOptions.page+1"
+                    [pageSize]="pageOptions.size" [maxSize]="5" (pageChange)="paginate($event)" size="sm"
+                    [rotate]="true" [ellipses]="true" [boundaryLinks]="true">
+                </ngb-pagination>
+            </div>
+        </section>
+    </div>
+</div>

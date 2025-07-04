@@ -1,0 +1,83 @@
+ 
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-3"> 
+            <label for="nom" class="form-label">Nom du projet<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom du projet" formControlName="name">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="chef_projet" class="form-label">Responsable<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="chef_projet" placeholder="Responsable" formControlName="chef_projet">
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 mb-3">
+          <label class="form-label">Statut du projet <small style="color: red;">*</small></label>
+          <ng-select 
+            [items]="statutProjet" 
+             bindLabel="description" 
+             bindValue="name"
+              placeholder="Selectionner..."
+            formControlName="statut_projet">
+          </ng-select>
+        </div>
+
+        <div class="col-md-6 col-sm-6 mb-3">
+          <label class="form-label">Domaine <small style="color: red;">*</small></label>
+          <ng-select 
+            [items]="pilierRse" 
+             bindLabel="description" 
+             bindValue="name"
+              placeholder="Selectionner..."
+            formControlName="pilier_rse">
+          </ng-select>
+        </div>
+
+        
+        <div class="col-sm-12">
+            <div class="mb-3">
+              <label for="budget_previsionnel" class="form-label">Budget alouer<small style="color: red;">*</small></label>
+              <input type="number" class="form-control form-control-lg" placeholder="0" id="budget_previsionnel" formControlName="budget_previsionnel">
+            </div>
+        </div>
+        
+        <div class="col-sm-12">
+            <div class="mb-3">
+              <label for="desc" class="form-label">Description du projet<small style="color: red;">*</small></label>
+              <textarea id="desc"  class="form-control form-control-lg" placeholder="Decrivez le projet ici..." formControlName="description"></textarea>
+            </div>
+          </div>
+
+          
+        <div class="row col-md-12">
+          <div class="col-6">
+            <label for="dateDebutPrevu" class="form-label">Date de debut prevu<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="dateDebutPrevu" placeholder="date de debut prevu" formControlName="dateDebutPrevu">
+          </div>
+          <div class="col-6">
+            <label for="dateFinPrevu" class="form-label">Date de fin prevu<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="dateFinPrevu" placeholder="date de fin prevu" formControlName="dateFinPrevu">
+          </div>
+        </div>
+          
+        <div class="row col-md-12">
+            <div class="col-6">
+              <label for="dateDebutReel" class="form-label">Date de debut reel<small style="color: red;">*</small></label>
+              <input type="date" class="form-control form-control-lg" id="dateDebutReel" placeholder="date de debut reel" formControlName="dateDebutReel">
+            </div>
+            <div class="col-6">
+              <label for="dateFinReel" class="form-label">Date de fin reel<small style="color: red;">*</small></label>
+              <input type="date" class="form-control form-control-lg" id="dateFinReel" placeholder="date de fin reel" formControlName="dateFinReel">
+            </div>
+          </div>
+      </div>
+  
+    </form>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="update()" [disabled]="!form.valid">Enregistrer</button>
+    </div>

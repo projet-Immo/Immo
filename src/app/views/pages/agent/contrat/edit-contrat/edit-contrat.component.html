@@ -1,0 +1,51 @@
+
+<section>   
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-md-6 col-sm-12 mb-3">
+          <label class="form-label">Statut contrat <small style="color: red;">*</small></label>
+          <ng-select 
+            [items]="statusContrat" 
+             bindLabel="description" 
+             bindValue="name"
+              placeholder="Selectionner..."
+            formControlName="statusContrat">
+          </ng-select>
+        </div>
+
+        <div class="col-md-6 col-sm-12 mb-3">
+          <label class="form-label">Type contrat <small style="color: red;">*</small></label>
+          <ng-select 
+            [items]="typeContrat" 
+             bindLabel="description" 
+             bindValue="name"
+              placeholder="Selectionner..."
+            formControlName="typeContrat">
+          </ng-select>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="dateDebut" class="form-label">Date debut<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="dateDebut" formControlName="dateDebut">
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="dateFin" class="form-label">Date fin<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="dateFin" formControlName="dateFin">
+          </div>
+        </div>
+  
+      </div>
+    </form>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="update()" [disabled]="!form.valid">Enregistrer</button>
+    </div>
+  </section>
+
+  

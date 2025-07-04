@@ -1,0 +1,63 @@
+<section>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-sm-6 mb-3">
+        <label class="form-label">Libellé <small class="text-danger">*</small></label>
+        <input type="text" class="form-control" formControlName="libelle" placeholder="Nom de l'objectif">
+      </div>
+
+      <div class="col-sm-6 mb-3">
+        <label class="form-label">Type Objectif <small class="text-danger">*</small></label>
+        <select class="form-select" formControlName="typeObjectif">
+          <option value="">Sélectionner</option>
+          <option value="ENVIRONNEMENT">ENVIRONNEMENT</option>
+          <option value="QUANTITATIF">Quantitatif</option>
+          <option value="CURRENT">CURRENT</option>
+          <option value="AFTER">AFTER</option>
+        </select>
+      </div>
+
+      <div class="col-12 mb-3">
+        <label class="form-label">Description <small class="text-danger">*</small></label>
+        <textarea class="form-control" formControlName="description" rows="3"></textarea>
+      </div>
+
+      <div class="col-sm-6 mb-3">
+        <label class="form-label">Date Début Prévue <small class="text-danger">*</small></label>
+        <input type="date" class="form-control" formControlName="dateDebutPrevue">
+      </div>
+
+      <div class="col-sm-6 mb-3">
+        <label class="form-label">Date Fin Prévue <small class="text-danger">*</small></label>
+        <input type="date" class="form-control" formControlName="dateFinPrevue">
+      </div>
+
+      <div class="col-12 mb-3">
+        <label class="form-label">Projet lié (ID) <small class="text-danger">*</small></label>
+        <input type="number" class="form-control" formControlName="projet.id" placeholder="ID du projet">
+      </div>
+
+      <div class="col-12 mb-3">
+        <label class="form-label">
+          <input type="checkbox" [checked]="isOldChecked" (click)="toggleOldDates()"> Ajouter des dates réelles
+        </label>
+      </div>
+
+      <div *ngIf="isOldChecked" class="row">
+        <div class="col-sm-6 mb-3">
+          <label class="form-label">Date Début Réelle</label>
+          <input type="date" class="form-control" formControlName="dateDebutReelle">
+        </div>
+        <div class="col-sm-6 mb-3">
+          <label class="form-label">Date Fin Réelle</label>
+          <input type="date" class="form-control" formControlName="dateFinReelle">
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+    <button type="button" class="btn btn-primary" (click)="update()" [disabled]="form.invalid">Modifier</button>
+  </div>
+</section>

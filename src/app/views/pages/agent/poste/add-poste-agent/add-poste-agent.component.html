@@ -1,0 +1,102 @@
+<section *ngIf="!isSearch">   
+    <form [formGroup]="form">
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-3"> 
+            <label for="int" class="form-label">Intitule du poste<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="int" placeholder="Intitule" formControlName="name">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="serv" class="form-label">Service<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="serv" placeholder="Service" formControlName="service">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-sm-12 mb-3">
+          <label class="form-label">Etat du poste <small style="color: red;">*</small></label>
+          <ng-select 
+            [items]="ocp" 
+            bindLabel="description" 
+            bindValue="name"
+              placeholder="Selectionner..."
+            formControlName="occupation">
+          </ng-select>
+        </div>
+        <div class="col-md-6"> 
+          <label for="lieu" class="form-label">Lieu</label>
+          <input type="text" class="form-control form-control-lg" id="lieu" placeholder="Lieu" formControlName="lieu">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+            <label for="dtd" class="form-label">Date de debut<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="dtd" placeholder="date de debut" formControlName="dateDebut">
+        </div>
+        <div class="col-md-6">
+            <label for="dtf" class="form-label">Date de fin<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="dtf" placeholder="date de fin" formControlName="dateFin">
+        </div>
+      </div>
+
+
+    </form>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="create()" [disabled]="!form.valid">Enregistrer</button>
+    </div>
+  </section>
+  
+  <section *ngIf="isSearch">   
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-3"> 
+            <label for="int" class="form-label">Intitule du poste<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="int" placeholder="Intitule" formControlName="name">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="serv" class="form-label">Service<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="serv" placeholder="Service" formControlName="service">
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12 mb-3">
+          <label class="form-label">Etat <small style="color: red;">*</small></label>
+          <ng-select 
+            [items]="ocp"
+             bindLabel="description" 
+             bindValue="name"
+              placeholder="Selectionner..."
+            formControlName="occupation">
+          </ng-select>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="prenom" class="form-label">Date debut<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="prenom" placeholder="date debut" formControlName="dateDebut">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="dtf" class="form-label">Date fin<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="dtf" placeholder="date fin" formControlName="dateFin">
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="doSearch()">Rechercher</button>
+    </div>
+  </section>
+  

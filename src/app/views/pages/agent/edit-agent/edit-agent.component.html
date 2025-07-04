@@ -1,0 +1,64 @@
+<section>   
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-3"> 
+            <label for="nom" class="form-label">Nom<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom" formControlName="name">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="prenom" class="form-label">Prenom<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="prenom" placeholder="Prenom" formControlName="lastName">
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12 mb-3">
+          <label class="form-label">Sexe <small style="color: red;">*</small></label>
+          <ng-select 
+            [items]="sexeAgent" 
+             bindLabel="description" 
+             bindValue="name"
+              placeholder="Selectionner..."
+            formControlName="sexe">
+          </ng-select>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="prenom" class="form-label">Date Naissance<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="prenom" placeholder="date naissance" formControlName="dni">
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="mb-3"> 
+            <label for="adresse" class="form-label">Adresse</label>
+            <input type="text" class="form-control form-control-lg" id="adresse" placeholder="Adresse" formControlName="address">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control form-control-lg" id="email" placeholder="Email" formControlName="email">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="mb-3"> 
+            <label for="telephone" class="form-label">Téléphone</label>
+            <input type="text" class="form-control form-control-lg" id="telephone" placeholder="Téléphone" formControlName="phone">
+          </div>
+      </div>
+  
+      </div>
+    </form>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="update()" [disabled]="!form.valid">Enregistrer</button>
+    </div>
+  </section>
+
+  

@@ -1,0 +1,61 @@
+
+<div class="container d-flex flex-column">
+    <div class=" d-flex justify-content-between align-items-center flex-wrap">
+        <!-- Breadcrumb à gauche -->
+        <nav class="page-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="cursor-pointer breadcrumb-item text-bitbucket fw-bold"><a routerLink="/admin/agent">Liste agents</a></li>
+                <li class="breadcrumb-item active">{{ agent?.name }} {{ agent?.lastName }}</li>
+                <li class="breadcrumb-item active">suivi</li>
+            </ol>
+        </nav>
+    
+    </div>
+    
+    <!-- agent informations -->
+    <div class="  agent-info-breafing gap-1 d-flex flex-column">
+        <h1 class="fw-bold">{{ agent?.name }} {{ agent?.lastName }}</h1>
+        <div class="row align-items-center d-flex">
+            <h5 class="d-flex gap-1">
+                <mat-icon class="text-primary fs-4">phone</mat-icon>
+                <span class="text-primary">{{ agent?.phone }}</span>
+            </h5>
+        </div>
+    </div>
+    
+    
+    <!-- Boutons à droite -->
+    <div class="d-flex justify-content-start align-items-center mt-4">
+        <!-- <button [ngClass]="option==1 ? 'col-3 border-0 fs-6 p-2 bg-primary text-white':'col-3 border-0 fs-6 p-2'" (click)="option=1">Informations personnelle</button> -->
+        <button [ngClass]="option==2 ? 'col-3 border-0 fs-6 p-2 bg-primary text-white':'col-3 border-0 fs-6 p-2'" (click)="option=2">Postes</button>
+        <button [ngClass]="option==3 ? 'col-3 border-0 fs-6 p-2 bg-primary text-white':'col-3 border-0 fs-6 p-2'" (click)="option=3">Salaires</button>
+        <button [ngClass]="option==4 ? 'col-3 border-0 fs-6 p-2 bg-primary text-white':'col-3 border-0 fs-6 p-2'" (click)="option=4">Contrats</button>
+        <button [ngClass]="option==5 ? 'col-3 border-0 fs-6 p-2 bg-primary text-white':'col-3 border-0 fs-6 p-2'" (click)="option=5">Missions</button>
+    </div>
+    
+    <div *ngIf="option==1" class="card mt-4">
+        <!-- info component -->
+    </div>
+    
+    <div *ngIf="option==2" class="card mt-4">
+        <!-- composant poste -->
+        <app-list-poste-agent [agentId]=agenId></app-list-poste-agent>
+    </div>
+    
+    <div *ngIf="option==3" class="card mt-4">
+        <!-- composant salaire -->
+         <app-list-salaire [agentId]=agenId></app-list-salaire>
+    </div>
+    
+    <div *ngIf="option==4" class="card mt-4">
+        <!-- composant contrat -->
+         <app-list-contrat [agentId]=agenId></app-list-contrat>
+    </div>
+    
+    <div *ngIf="option==5" class="card mt-4">
+        <!-- composant mission -->
+         <app-list-mission-agent [agentId]=agenId></app-list-mission-agent>
+    </div>
+</div>
+
+

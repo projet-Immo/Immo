@@ -1,0 +1,82 @@
+<section *ngIf="!isSearch">   
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-3"> 
+            <label for="montant" class="form-label">Montant<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="montant" placeholder="Montant" formControlName="montant">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="datePaiement" class="form-label">Date_Paiement<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="datePaiement" placeholder="datePaiement" formControlName="datePaiement">
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12 mb-3">
+          <label class="form-label">Statut_Paiement <small style="color: red;">*</small></label>
+          <ng-select 
+            [items]="StatutPaiement" 
+             bindLabel="description" 
+             bindValue="name"
+              placeholder="Selectionner..."
+            formControlName="statutPaiement">
+          </ng-select>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="description" class="form-label">Description<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="description" placeholder="description" formControlName="description">
+          </div>
+        </div>
+      </div>
+      
+    </form>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="create()" [disabled]="!form.valid">Enregistrer</button>
+    </div>
+  </section>
+  <!-- Partie recherche -->
+  <section *ngIf="isSearch">   
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-3"> 
+            <label for="montant" class="form-label">Montant<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="montant" placeholder="Montant" formControlName="montant">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="datePaiement" class="form-label">Date_Paiement<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="datePaiement" placeholder="Date_Paiement" formControlName="datePaiement">
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12 mb-3">
+          <label class="form-label">statut_Paiement <small style="color: red;">*</small></label>
+          <ng-select 
+            [items]="StatutPaiement" 
+             bindLabel="description" 
+             bindValue="name"
+              placeholder="Selectionner..."
+            formControlName="statutPaiement">
+          </ng-select>
+        </div>
+        <!-- <div class="col-sm-6">
+          <div class="mb-3">
+            <label for="prenom" class="form-label">Date Naissance<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="prenom" placeholder="date naissance" formControlName="dni">
+          </div>
+        </div> -->
+      </div>
+    </form>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="doSearch()">Rechercher</button>
+    </div>
+  </section>
+  

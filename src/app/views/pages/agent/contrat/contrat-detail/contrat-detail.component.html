@@ -1,0 +1,38 @@
+<div class="contrat-section">
+  <div class="header mb-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">Contrats de l’agent</h2>
+    <button mat-raised-button color="primary" (click)="openAddContrat()">Ajouter Contrat</button>
+  </div>
+
+  <table mat-table [dataSource]="contrats" class="mat-elevation-z8" *ngIf="contrats.length > 0">
+
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Type -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+    <!-- Date début -->
+    <ng-container matColumnDef="dateDebut">
+      <th mat-header-cell *matHeaderCellDef> Date début </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateDebut | date}} </td>
+    </ng-container>
+
+    <!-- Date fin -->
+    <ng-container matColumnDef="dateFin">
+      <th mat-header-cell *matHeaderCellDef> Date fin </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateFin | date}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['id', 'type', 'dateDebut', 'dateFin']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['id', 'type', 'dateDebut', 'dateFin'];"></tr>
+  </table>
+
+  <p *ngIf="contrats.length === 0" class="text-center mt-4">Aucun contrat trouvé.</p>
+</div>
