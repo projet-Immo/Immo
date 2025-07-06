@@ -5,11 +5,12 @@ import { ProjetService } from 'src/app/services/projet/projet.service';
 import { Alertes } from 'src/app/util/alerte';
 
 @Component({
-  selector: 'app-rse-list-projet',
-  templateUrl: './rse-list-projet.component.html',
-  styleUrls: ['./rse-list-projet.component.scss']
+  selector: 'app-list-projet',
+  templateUrl: './list-projet.component.html',
+  styleUrls: ['./list-projet.component.scss']
 })
-export class RseListProjetComponent {
+export class ListProjetComponent {
+
   displayedColumns: string[] = [
     'name',
     'chef_projet',
@@ -105,7 +106,7 @@ export class RseListProjetComponent {
   }
 
   openSuivi(projet:any){
-    console.log("projet:", projet)
+    // console.log("projet:", projet)
     this.router.navigateByUrl(`/admin/rse/projet/${projet?.name}`)
   }
 
@@ -124,7 +125,7 @@ export class RseListProjetComponent {
   }
 
   voirSuivi(id: number): void {
-  this.router.navigate(['/contrats', id]);
-}
+    this.router.navigate(['/contrats', id]);
+  }
 
 }

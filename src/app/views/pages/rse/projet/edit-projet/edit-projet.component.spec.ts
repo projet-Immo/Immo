@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RseListProjetComponent } from './rse-list-projet.component';
+import { EditProjetComponent } from './edit-projet.component';
 
-describe('RseListProjetComponent', () => {
-  let component: RseListProjetComponent;
-  let fixture: ComponentFixture<RseListProjetComponent>;
+describe('EditProjetComponent', () => {
+  let component: EditProjetComponent;
+  let fixture: ComponentFixture<EditProjetComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RseListProjetComponent ]
+      declarations: [ EditProjetComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RseListProjetComponent);
+    fixture = TestBed.createComponent(EditProjetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

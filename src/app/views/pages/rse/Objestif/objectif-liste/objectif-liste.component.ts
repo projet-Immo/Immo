@@ -41,7 +41,11 @@ export class ObjectifListeComponent implements OnInit {
       'dateDebutPrevue',
       'dateFinPrevue',
       'dateDebutReelle',
+<<<<<<< HEAD
       'dateFinReelle',
+=======
+  'dateFinReelle',
+>>>>>>> prod
       'actions'
     ];
   } else {
@@ -53,7 +57,11 @@ export class ObjectifListeComponent implements OnInit {
       'dateDebutPrevue',
       'dateFinPrevue',
       'dateDebutReelle',
+<<<<<<< HEAD
       'dateFinReelle',
+=======
+  'dateFinReelle',
+>>>>>>> prod
       'projet',
       'actions'
     ];

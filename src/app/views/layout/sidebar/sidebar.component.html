@@ -3,7 +3,7 @@
 
     <!--- Logo -->
     <a routerLink="/" class="sidebar-brand nobleui-logo">
-      Webgram
+      SMARTLEGAL
     </a>
 
     <!-- <a routerLink="/" class="sidebar-brand nobleui-logo">
@@ -34,7 +34,7 @@
             <span class="link-arrow" data-feather="chevron-down" appFeatherIcon></span>
           </a>
     
-          <a class="nav-link nav-link-ref" [routerLink]="item.link" *ngIf="!hasItems(item)"
+          <a class="nav-link nav-link-ref item-menu-link" [routerLink]="item.link" *ngIf="!hasItems(item)"
             [attr.data-parent]="item.parentId">
             <i class="link-icon" [attr.data-feather]="item.icon" appFeatherIcon *ngIf="item.icon"></i>
             <span class="link-title"> {{ item.label }}</span>

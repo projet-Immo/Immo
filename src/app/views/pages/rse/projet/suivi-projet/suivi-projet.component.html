@@ -1,17 +1,6 @@
 
 <div class="container d-flex flex-column">
-    <div class=" d-flex justify-content-between align-items-center flex-wrap">
-        <!-- Breadcrumb à gauche -->
-        <nav class="page-breadcrumb">
-            <ol class="breadcrumb">
-                <li class="cursor-pointer breadcrumb-item text-bitbucket fw-bold"><a routerLink="/admin/rse">Liste projets</a></li>
-                <li class="breadcrumb-item active">{{ projet?.name }}</li>
-                <li class="breadcrumb-item active">suivi</li>
-            </ol>
-        </nav>
-    
-    </div>
-    
+
     <!-- projet informations -->
     <!-- <div class="  projet-info-breafing gap-1 d-flex flex-column">
         <h1 class="fw-bold">{{ projet?.name }}</h1>
@@ -26,69 +15,91 @@
     <!-- Section d'informations sur le projet RSE -->
 
     <div class="container-fluid py-3 mb-3" style="background: #f8f9fa; border-radius: 8px;">
-        <div class="row align-items-center">
-        <div class="col-md-8">
-            <div class="d-flex align-items-center gap-3">
-                <h2 class="mb-1" style="font-weight: 700;">{{ projet.name }}</h2>
-                <span class="badge bg-success me-2">{{ projet.pilier_rse.description }}</span>
+        <div class="row col-md-6 align-items-start">
+            <div class="row col-md-12">
+                <div class="d-flex align-items-center gap-3">
+                    <h2 class="mb-1" style="font-weight: 700;">{{ projet.name.toUpperCase() }}</h2>
+                    <span class="badge bg-success me-2">{{ projet.pilier_rse.description }}</span>
+                </div>
+                
+                <nav class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="cursor-pointer breadcrumb-item text-bitbucket fw-bold"><a routerLink="/admin/rse">PROJETS</a></li>
+                        <li class="breadcrumb-item active">{{ projet?.name.toUpperCase() }}</li>
+                        <li class="breadcrumb-item active">SUIVI</li>
+                    </ol>
+                </nav>
             </div>
 
-            <p class="mt-4 mb-4 text-muted">{{ projet.description }}</p>
+        </div>
 
-            <div class="d-flex flex-wrap align-items-center mb-2 gap-3">
-                <span class="me-3 d-flex flex-column">
-                    <i class="bi bi-person-circle me-1"></i>
-                    <strong>Chef de projet :</strong> {{ projet.chef_projet }}
+        <div class="row col-md-12 gap-2">
+            <div class="row col-md-6 gap-2">
+                <span class="col-md-5 card card-group d-flex flex-column justify-content-center gap-1">
+                    <i class="icon-user-checkd"></i>
+                    <strong class="text-muted">Chef de projet :</strong> <span>{{ projet.chef_projet }} </span>
                 </span>
-
-                <span class="me-3 d-flex flex-column">
+    
+                <span class="col-md-5 card card-group d-flex flex-column justify-content-center gap-1">
                     <i class="bi bi-cash-stack me-1"></i>
-                    <strong>Budget prévisionnel :</strong> {{ projet.budget_previsionnel | currency:'XOF' }}
+                    <strong class="text-muted">Budget prévisionnel :</strong> <span>{{ projet.budget_previsionnel | currency:'XOF' }} </span>
                 </span>
-
-                <span class="me-3 d-flex flex-column">
+    
+                <span class="col-md-5 card card-group d-flex flex-column justify-content-center gap-1">
                     <i class="bi bi-cash me-1"></i>
-                    <strong>Budget consommé :</strong> {{ projet.budget_consumme | currency:'XOF' }}
+                    <strong class="text-muted">Budget consommé :</strong> <span>{{ projet.budget_consumme | currency:'XOF' }} </span>
+
                 </span>
                 
-                <span class="me-3 d-flex flex-column">
+                <span class="col-md-5 card card-group d-flex flex-column justify-content-center gap-1">
                     <i class="bi bi-flag me-1"></i>
-                    <strong>Statut :</strong> {{ projet.statut_projet.description }}
+                    <strong class="text-muted">Statut :</strong> <span>{{ projet.statut_projet.description }} </span>
                 </span>
             </div>
 
+
+            <div class="row col-md-6 gap-2 align-items-start">
+                <div class="row col-md-12 card card-group p-2 gap-2">
+                    <!-- <strong class="col-md-12">Description</strong> -->
+                    <strong class="text-muted col-md-12">Description</strong>
+                    <p class="col-md-12">{{ projet.description }}</p>
+                </div>
+    
+                <div class="row col-md-12 card card-group ">
+                    <div class="row text-start p-2">
+                        <div class="col-md-6 gap-1">
+                            <strong class="text-muted">Début Prévu Le</strong>
+                            <div>{{ projet.dateDebutPrevu | date:'dd/MM/yyyy' }}</div>
+                        </div>
+                        <div class="col-md-6 gap-1" *ngIf="projet.dateDebutReel">
+                            <strong class="text-muted">Début Réel Le</strong>
+                            <div>{{ projet.dateDebutReel | date:'dd/MM/yyyy' }}</div>
+                        </div>
+                        <div class="col-md-6 gap-1 mt-3">
+                            <strong class="text-muted">Fin Prévue Pour Le</strong>
+                            <div>{{ projet.dateFinPrevu | date:'dd/MM/yyyy' }}</div>
+                        </div>
+                        <div *ngIf="projet.dateFinReel" class="col-md-6 gap-1 mt-3">
+                            <strong class="text-muted">Fin Réelle Le</strong>
+                            <div>{{ projet.dateFinReel | date:'dd/MM/yyyy' }}</div>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
         </div>
-        <div class="col-md-4">
-            <div class="row text-center">
-            <div class="col-6 mb-2">
-                <small class="text-muted">Début Prévu Le</small>
-                <div>{{ projet.dateDebutPrevu | date:'dd/MM/yyyy' }}</div>
-            </div>
-            <div class="col-6 mb-2">
-                <small class="text-muted">Fin Prévue Pour Le</small>
-                <div>{{ projet.dateFinPrevu | date:'dd/MM/yyyy' }}</div>
-            </div>
-            <div class="col-6" *ngIf="projet.dateDebutReel">
-                <small class="text-muted">Début Réel LE</small>
-                <div>{{ projet.dateDebutReel | date:'dd/MM/yyyy' }}</div>
-            </div>
-            <div *ngIf="projet.dateFinReel" class="col-6">
-                <small class="text-muted">Fin Réelle Le</small>
-                <div>{{ projet.dateFinReel | date:'dd/MM/yyyy' }}</div>
-            </div>
-            </div>
-        </div>
-        </div>
+
     </div>
   
     
     <!-- Boutons à droite -->
-    <div class="d-flex justify-content-start align-items-center mt-4">
+    <div class="d-flex justify-content-start align-items-center mt-2 card card-group">
         <!-- <button [ngClass]="option==1 ? 'col-3 border-0 fs-6 p-2 bg-primary text-white':'col-3 border-0 fs-6 p-2'" (click)="option=1">Informations personnelle</button> -->
-        <button [ngClass]="option==2 ? 'col-3 border-0 fs-6 p-2 bg-primary text-white':'col-3 border-0 fs-6 p-2'" (click)="option=2">Objectifs</button>
-        <button [ngClass]="option==4 ? 'col-3 border-0 fs-6 p-2 bg-primary text-white':'col-3 border-0 fs-6 p-2'" (click)="option=4">Taches</button>
-        <button [ngClass]="option==3 ? 'col-3 border-0 fs-6 p-2 bg-primary text-white':'col-3 border-0 fs-6 p-2'" (click)="option=3">Indicateurs</button>
-        <button [ngClass]="option==5 ? 'col-3 border-0 fs-6 p-2 bg-primary text-white':'col-3 border-0 fs-6 p-2'" (click)="option=5">Parties prenantes</button>
+        <!-- <button class="col-3 border-0 fs-6 p-2 bg-btn-special-active">test</button> -->
+        <button [ngClass]="option==2 ? 'col-3 border-0 fs-6 p-2 bg-btn-special-active text-white':' bg-transparent col-3 border-0 fs-6 p-2'" (click)="option=2">Objectifs</button>
+        <button [ngClass]="option==4 ? 'col-3 border-0 fs-6 p-2 bg-btn-special-active text-white':' bg-transparent col-3 border-0 fs-6 p-2'" (click)="option=4">Taches</button>
+        <button [ngClass]="option==3 ? 'col-3 border-0 fs-6 p-2 bg-btn-special-active text-white':' bg-transparent col-3 border-0 fs-6 p-2'" (click)="option=3">Indicateurs</button>
+        <button [ngClass]="option==5 ? 'col-3 border-0 fs-6 p-2 bg-btn-special-active text-white':' bg-transparent col-3 border-0 fs-6 p-2'" (click)="option=5">Parties prenantes</button>
     </div>
     
     <div *ngIf="option==1" class="card mt-4">
@@ -97,8 +108,13 @@
     
     <div *ngIf="option==2" class="card mt-4">
         <!-- composant objectifs -->
+<<<<<<< HEAD
         <app-objectif-liste [projetId]="projet.id"></app-objectif-liste>
     </div>
+=======
+<app-objectif-liste [projetId]="projet.id" class="p-3"></app-objectif-liste>
+    </div>    
+>>>>>>> prod
     
     <div *ngIf="option==3" class="card mt-4">
         <!-- composant taches -->

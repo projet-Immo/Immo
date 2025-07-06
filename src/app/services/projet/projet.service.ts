@@ -33,14 +33,26 @@ export class ProjetService {
       if(req?.name != undefined && req?.name){
         parametres = parametres.append("name", req?.name);
       }
-      if(req?.lastName != undefined && req?.lastName){
-        parametres = parametres.append("lastName", req?.lastName);
+      if(req?.chef_projet != undefined && req?.chef_projet){
+        parametres = parametres.append("chef_projet", req?.chef_projet);
       }
-      if(req?.sexe != undefined && req?.sexe){
-        parametres = parametres.append("sexe", req?.sexe);
+      if(req?.statut_projet != undefined && req?.statut_projet){
+        parametres = parametres.append("statut_projet", req?.statut_projet);
       }
-      if(req?.address != undefined && req?.address){
-        parametres = parametres.append("address", req?.address);
+      if(req?.pilier_rse != undefined && req?.pilier_rse){
+        parametres = parametres.append("pilier_rse", req?.pilier_rse);
+      }    
+      if(req?.dateDebutPrevu != undefined && req?.dateDebutPrevu){
+        parametres = parametres.append("dateDebutPrevu", req?.dateDebutPrevu);
+      }    
+      if(req?.dateFinPrevu != undefined && req?.dateFinPrevu){
+        parametres = parametres.append("dateFinPrevu", req?.dateFinPrevu);
+      }    
+      if(req?.dateDebutReel != undefined && req?.dateDebutReel){
+        parametres = parametres.append("dateDebutReel", req?.dateDebutReel);
+      }    
+      if(req?.dateFinReel != undefined && req?.dateFinReel){
+        parametres = parametres.append("dateFinReel", req?.dateFinReel);
       }    
       return this.http.get<any>(
         `${environment.baseUrl}projets/all?page=${req?.page}&size=${req?.size}`,{

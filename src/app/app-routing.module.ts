@@ -24,6 +24,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
+        path: 'dashboard',
+        loadChildren: () => import('./views/pages/controle/controle.module').then(m => m.ControleModule)
+      },
+      {
         path: 'rse',
         loadChildren: () => import('./views/pages/rse/rse.module').then(m => m.RSEModule)
       },

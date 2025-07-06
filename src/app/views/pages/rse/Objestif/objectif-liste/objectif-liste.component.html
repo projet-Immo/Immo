@@ -3,9 +3,13 @@
   <!-- Breadcrumb à gauche -->
   <nav class="page-breadcrumb cursor-pointer">
     <ol class="breadcrumb mb-0">
+<<<<<<< HEAD
 <li class="breadcrumb-item active">
   <a>{{ projetId ? 'Objectifs du projet' : 'Liste Objectifs' }}</a>
 </li>
+=======
+      <li class="breadcrumb-item active"><a>Liste Objectifs</a></li>
+>>>>>>> prod
     </ol>
   </nav>
 
@@ -153,6 +157,7 @@
     <button type="button" class="btn-close" (click)="modal.close()" aria-label="Close"></button>
   </div>
   <div class="modal-body">
+<<<<<<< HEAD
     <<app-objectif-edit 
  [isSearch]="false"
  [objectifId]="selectedObjectifId"
@@ -162,3 +167,8 @@
   </div>
 </ng-template>
  
+=======
+    <app-objectif-edit [objectifId]="selectedObjectifId" (submit)="loadObjectifs(); modal.close()"></app-objectif-edit>
+  </div>
+</ng-template>
+>>>>>>> prod
