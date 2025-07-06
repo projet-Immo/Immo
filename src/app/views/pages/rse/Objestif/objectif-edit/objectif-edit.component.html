@@ -11,9 +11,9 @@
         <select class="form-select" formControlName="typeObjectif">
           <option value="">Sélectionner</option>
           <option value="ENVIRONNEMENT">ENVIRONNEMENT</option>
-          <option value="QUANTITATIF">Quantitatif</option>
-          <option value="CURRENT">CURRENT</option>
-          <option value="AFTER">AFTER</option>
+          <option value="SOCIAL"> SOCIAL</option>
+          <option value=" GOUVERNANCE"> GOUVERNANCE</option>
+          <option value="FORMATION">FORMATION</option>
         </select>
       </div>
 
@@ -32,10 +32,10 @@
         <input type="date" class="form-control" formControlName="dateFinPrevue">
       </div>
 
-      <div class="col-12 mb-3">
-        <label class="form-label">Projet lié (ID) <small class="text-danger">*</small></label>
-        <input type="number" class="form-control" formControlName="projet.id" placeholder="ID du projet">
-      </div>
+      <div class="col-12 mb-3" *ngIf="!projetId">
+  <label class="form-label">Projet lié (ID) <small class="text-danger">*</small></label>
+  <input type="number" class="form-control" formControlName="projetId" placeholder="ID du projet">
+</div>
 
       <div class="col-12 mb-3">
         <label class="form-label">
