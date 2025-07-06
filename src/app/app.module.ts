@@ -28,8 +28,7 @@ import { ErrorPageComponent } from './views/pages/error-page/error-page.componen
 
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { PipeModule } from './util/pipe/pipe.module';
-import { ObjectifListeComponent } from './views/pages/rse/Objestif/objectif-liste/objectif-liste.component';
-import { ObjectifAddComponent } from './views/pages/rse/Objestif/objectif-add/objectif-add.component';
+import { ControleModule } from './views/pages/controle/controle.module';
 
 
 @NgModule({
@@ -58,7 +57,7 @@ import { ObjectifAddComponent } from './views/pages/rse/Objestif/objectif-add/ob
     MatMenuModule,
     MatTableModule,
     MatIconModule,
-    
+    ControleModule
   ],
   providers: [
     AuthGuard,

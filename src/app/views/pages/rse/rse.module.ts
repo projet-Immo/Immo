@@ -8,23 +8,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RSERoutingModule } from './rse-routing.module';
-import { RseListProjetComponent } from './rse-list-projet/rse-list-projet.component';
 import { AddProjetComponent } from './projet/add-projet/add-projet.component';
 import { SuiviProjetComponent } from './projet/suivi-projet/suivi-projet.component';
-import { ObjectifListeComponent } from './Objestif/objectif-liste/objectif-liste.component';
-import { ObjectifAddComponent } from './Objestif/objectif-add/objectif-add.component';
-import { ObjectifEditComponent } from './Objestif/objectif-edit/objectif-edit.component';
+import { ListProjetComponent } from './projet/list-projet/list-projet.component';
+import { EditProjetComponent } from './projet/edit-projet/edit-projet.component';
 
 
 @NgModule({
   declarations: [
-  
-    RseListProjetComponent,
-       AddProjetComponent,
-       SuiviProjetComponent,
-       ObjectifListeComponent,
-       ObjectifAddComponent,
-       ObjectifEditComponent
+      AddProjetComponent,
+      SuiviProjetComponent,
+      ListProjetComponent,
+      EditProjetComponent
   ],
   imports: [
   CommonModule,
