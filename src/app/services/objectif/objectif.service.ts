@@ -35,10 +35,7 @@ export class ObjectifService {
     return this.http.get<any>(`${environment.baseUrl}objectifs/all`);
   }
 
-<<<<<<< HEAD
   
-=======
->>>>>>> prod
    // ✅ Rechercher des objectifs par type et/ou dates
   searchObjectifs(typeObjectif?: string, dateDebut?: string, dateFin?: string): Observable<any> {
     let params = new HttpParams();

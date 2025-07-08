@@ -1,0 +1,56 @@
+<div id="printable">
+<div id="objectifDetails" class="objectif-details p-4">
+  <div class="text-center mb-3">
+    <img src="assets/logo.png" alt="Logo Entreprise" style="height: 60px;" />
+    <h2 class="mt-2">🗂️ Fiche Détail Objectif</h2>
+    <p>Date de génération : {{ today | date: 'longDate' }}</p>
+  </div>
+  <table class="table table-bordered">
+    <tbody>
+    
+      <tr>
+        <th scope="row">Libellé</th>
+        <td>{{ objectif.libelle }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Description</th>
+        <td>{{ objectif.description }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Type</th>
+        <td>{{ objectif.typeObjectif }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Date Début Prévue</th>
+        <td>{{ objectif.dateDebutPrevue | date: 'longDate' }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Date Fin Prévue</th>
+        <td>{{ objectif.dateFinPrevue | date: 'longDate' }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Date Début Réelle</th>
+        <td>{{ objectif.dateDebutReelle | date: 'longDate' }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Date Fin Réelle</th>
+        <td>{{ objectif.dateFinReelle | date: 'longDate' }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Projet</th>
+        <td>{{ objectif.projetId }}</td>
+      </tr>
+    </tbody>
+  </table>  
+  <footer class="text-center mt-5">
+    <small>Document généré automatiquement par Webgram</small>
+  </footer>
+ 
+</div>
+</div>
+
+
+  <!-- Bouton visible seulement à l'écran -->
+<div class="no-print">
+  <button class="btn btn-primary" (click)="downloadPdf()">📄 Télécharger le PDF</button>
+</div>

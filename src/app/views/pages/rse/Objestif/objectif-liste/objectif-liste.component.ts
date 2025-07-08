@@ -1,6 +1,8 @@
-import { Component, Input, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { ObjectifService } from 'src/app/services/objectif/objectif.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProjetService } from 'src/app/services/projet/projet.service';
+import { Alertes } from 'src/app/util/alerte';
 
 @Component({
   selector: 'app-objectif-liste',
@@ -10,9 +12,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ObjectifListeComponent implements OnInit {
 
   objectifs: any[] = [];
+    projets: any[] = []; 
+  projetsMap: { [key: number]: string } = {};
   selectedObjectifId: any = null;
-  @Input() projetId: number | null = null; // Optionnel, si vous souhaitez filtrer par projet
-   
+ selectedObjectif: any = null;
+
+  @Input() projetId: number | null = null; 
+  @ViewChild('DetailsObjectifModal') detailsModalRef!: TemplateRef<any>;
   displayedColumns: string[] = [
     'id',
     'libelle',
@@ -28,7 +34,8 @@ export class ObjectifListeComponent implements OnInit {
 
 
   constructor(private objectifService: ObjectifService,
-         private modalService: NgbModal
+         private modalService: NgbModal,
+          private projetService: ProjetService
   )
    { }
 
@@ -41,11 +48,7 @@ export class ObjectifListeComponent implements OnInit {
       'dateDebutPrevue',
       'dateFinPrevue',
       'dateDebutReelle',
-<<<<<<< HEAD
       'dateFinReelle',
-=======
-  'dateFinReelle',
->>>>>>> prod
       'actions'
     ];
   } else {
@@ -57,31 +60,29 @@ export class ObjectifListeComponent implements OnInit {
       'dateDebutPrevue',
       'dateFinPrevue',
       'dateDebutReelle',
-<<<<<<< HEAD
       'dateFinReelle',
-=======
-  'dateFinReelle',
->>>>>>> prod
       'projet',
       'actions'
     ];
   }
 
-  this.loadObjectifs();
-}
+ 
 
-/*
-  loadObjectifs(): void {
-    this.objectifService.getAllObjectifs().subscribe({
-      next: (response) => {
-        console.log(response); // vérifie la structure
-        this.objectifs = response.payload || response;
-      },
-      error: (error) => {
-        console.error('Erreur lors du chargement des objectifs :', error);
-      }
+
+  this.projetService.getAllProjets().subscribe({
+      next: (data) => {
+        console.log('✅ Projets récupérés :', data);
+        this.projets = data.payload || data;
+
+        // Remplir la map ID → nom
+        this.projets.forEach(projet => {
+          this.projetsMap[projet.id] = projet.name;
+        });
+      },  error: (err) => console.error('Erreur getAllProjets :', err)
     });
-  }*/
+  
+     this.loadObjectifs();
+}
 
 loadObjectifs(): void {
   if (this.projetId) {
@@ -95,6 +96,19 @@ loadObjectifs(): void {
     this.objectifService.getAllObjectifs().subscribe({
       next: (response) => {
         this.objectifs = response.payload || response;
+
+        // ✅ Pour chaque objectif, récupérer le nom du projet si pas déjà fait
+        this.objectifs.forEach(obj => {
+          if (obj.projetId && !this.projetsMap[obj.projetId]) {
+            this.projetService.getProjetById(obj.projetId).subscribe({
+              next: (projet) => {
+                this.projetsMap[obj.projetId] = projet.name;
+              },
+              error: (err) => console.error(`Erreur en récupérant le projet ${obj.projetId}`, err)
+            });
+          }
+        });
+
       },
       error: (error) => console.error('Erreur lors du chargement de tous les objectifs :', error)
     });
@@ -118,17 +132,26 @@ loadObjectifs(): void {
     this.modalService.open(modal, { size: 'lg' });
   }
 
-  deleteObjectif(id: number) {
-    if (confirm('Voulez-vous vraiment supprimer cet objectif ?')) {
-      this.objectifService.deleteObjectifs(id).subscribe({
+deleteObjectif(objectifId: number) {
+  Alertes.confirmAction(
+    'Voulez-vous vraiment supprimer cet objectif ?',
+    'Cet élément sera définitivement supprimé',
+    () => {
+      this.objectifService.deleteObjectifs(objectifId).subscribe({
         next: () => {
-          console.log('Objectif supprimé');
-          this.loadObjectifs();
+          Alertes.alerteAddSuccess('Suppression réussie');
         },
-        error: (error) => console.error('Erreur suppression :', error)
+        error: (err) => {
+          Alertes.alerteAddDanger(err.error.message || 'Erreur lors de la suppression');
+        },
+        complete: () => {
+          this.loadObjectifs();
+        }
       });
     }
-  }
+  );
+}
+
 
  doSearch(criteria: any) {
   console.log('Critères reçus :', criteria);
@@ -147,10 +170,15 @@ loadObjectifs(): void {
 }
 
 
-  viewDetails(objectif: any) {
-    // Ici ton code pour afficher les détails
-    console.log('Voir détails :', objectif);
-  }
+viewDetails(objectif: any) {
+  this.selectedObjectif = objectif;
+  this.modalService.open(this.detailsModalRef, { size: 'lg' });
+}
+  closeDetails() {
+  this.selectedObjectif = null;
+  this.modalService.dismissAll();}
+
+
 
 ngOnChanges(changes: SimpleChanges): void {
   console.log('Changes détectés :', changes);
