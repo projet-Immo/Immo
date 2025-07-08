@@ -1,1 +1,51 @@
-<p>edit-employe works!</p>
+
+<form [formGroup]="form">
+    <div class="row">
+        <div class="row col-sm-12">
+            <div class="mb-3 col-md-4"> 
+                <label for="nom" class="form-label">Nom de l'employe<small style="color: red;">*</small></label>
+                <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom du de l'employe" formControlName="name">
+            </div>
+            <div class="mb-3 col-md-4"> 
+                <label for="nom" class="form-label">Prenom de l'employe<small style="color: red;">*</small></label>
+                <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom du de l'employe" formControlName="surname">
+            </div>
+            <div class="mb-3 col-md-4"> 
+                <label for="phone" class="form-label">Contact<small style="color: red;">*</small></label>
+                <input type="text" class="form-control form-control-lg" id="phone" placeholder="+221 7X XXX XX XX" formControlName="phone">
+            </div>
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label class="form-label">Departement <small style="color: red;">*</small></label>
+            <ng-select 
+                [items]="services"
+                bindLabel="name"
+                bindValue="id"
+                placeholder="Semployener..."
+                formControlName="serviceId">
+            </ng-select>
+        </div>
+
+        <div class="mb-3 col-md-6"> 
+            <label for="salaire" class="form-label">Salaire<small style="color: red;">*</small></label>
+            <input type="number" class="form-control form-control-lg" id="salaire" placeholder="Ex: 100000" formControlName="salaire">
+        </div>
+        
+        <div class="mb-3 col-md-6"> 
+            <label for="poste" class="form-label">Poste dans l'entreprise<small style="color: red;">*</small></label>
+            <input type="text" class="form-control form-control-lg" id="poste" placeholder="Poste de l'employe" formControlName="poste">
+        </div>
+
+        <div class="mb-3 col-md-6"> 
+            <label for="date_insertion" class="form-label">Date d'insertion</label>
+            <input type="date" class="form-control form-control-lg" id="date_insertion" placeholder="Nom du de l'employe" formControlName="date_insertion">
+        </div>
+        
+    </div>
+</form>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+    <button type="button" class="btn btn-primary" (click)="update()" [disabled]="!form.valid">Enregistrer</button>
+  </div>

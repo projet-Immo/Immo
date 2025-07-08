@@ -17,6 +17,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ListCandidatComponent } from './candidat/list-candidat/list-candidat.component';
+import { AddCandidatComponent } from './candidat/add-candidat/add-candidat.component';
+import { EditCandidatComponent } from './candidat/edit-candidat/edit-candidat.component';
+import { FormVoteComponent } from './election/form-vote/form-vote.component';
 
 
 
@@ -31,7 +35,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
        EditEmployeComponent,
        AddElectionComponent,
        EditElectionComponent,
-       ListElectionComponent
+       ListElectionComponent,
+       ListCandidatComponent,
+       AddCandidatComponent,
+       EditCandidatComponent,
+       FormVoteComponent
   ],
   imports: [
     CommonModule,

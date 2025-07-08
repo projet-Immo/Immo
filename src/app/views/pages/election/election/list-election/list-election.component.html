@@ -1,1 +1,152 @@
-<p>list-election works!</p>
+<div class="row flex-wrap grid-margin mb-1 align-items-start">
+
+    <!-- Breadcrumb à gauche -->
+    <nav class="page-breadcrumb gap-2 d-flex flex-column mb-4 col-md-6">
+        <h2>Election</h2>
+        <p>L'ensemble des elections de l'entreprise</p>
+    </nav>
+
+
+    <!-- Boutons à droite -->
+    <div class="d-flex justify-content-end align-items-center gap-2 col-md-6">
+        <button type="button" class="btn btn-secondary btn-icon me-2" (click)="openAddElection(SearchElectionModal)">
+            <i class="feather icon-search"></i>
+        </button>
+        <button type="button" class="btn border-0 btn-primary bg-special btn-icon-text d-flex align-items-center gap-2" (click)="openAddElection(addElectionModal)">
+            <i class="feather icon-plus-circle"></i> Nouvelle election
+        </button>
+    </div>
+
+</div>
+
+<div class="card mt-4" style="width: 100%;">
+    <div class="card-body p-0" style="width: 100%;">
+        <section class="table-container" tabindex="0" style="width: 100%; overflow-x: auto;">
+            <!-- <app-spinner *ngIf="loadingIndicator" [displayedColumns]="displayedColumns"></app-spinner> -->
+
+            <table mat-table [dataSource]="dataSource?.payload" class="w-100">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text bg-special" style="min-width:100px;"> Intitule </th>
+                    <td mat-cell *matCellDef="let election" class="text-left"> {{election?.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text bg-special" style="min-width:100px;">
+                        Statut </th>
+                    <td mat-cell *matCellDef="let election" class="text-left"> <span>{{election?.status.description}} </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="serviceName">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
+                        Departement </th>
+                    <td mat-cell *matCellDef="let election" class="text-center"> {{election?.serviceName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="candidat">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
+                        nbr de candidats </th>
+                    <td mat-cell *matCellDef="let election" class="text-center"> {{election?.candidat}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nbrVotant">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
+                        NBR de voteurs </th>
+                    <td mat-cell *matCellDef="let election" class="text-center"> {{election?.nbrVotant}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nbrVote">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
+                        Votes effectues </th>
+                    <td mat-cell *matCellDef="let election" class="text-center"> {{election?.nbrVote}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dateDebut">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
+                        Date debut </th>
+                    <td mat-cell *matCellDef="let election" class="text-center"> {{election?.dateDebut}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="link" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text bg-special" style="min-width:0px;">
+                        lien de vote </th>
+                    <td class="text-center" mat-cell *matCellDef="let election">
+                        <a target="_blank" [routerLink]="['/election/vote/form/', election.id*electionNumberCode]" mat-icon-button aria-label="Example icon-button with a menu">
+                            <mat-icon>link</mat-icon>
+                        </a>
+                    </td>
+                </ng-container>
+
+                <!-- <app-list-contrat></app-list-contrat> -->
+                <ng-container matColumnDef="actions" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text bg-special" style="min-width:0px;">
+                        Actions </th>
+                    <td mat-cell *matCellDef="let election">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="openEditElection(EditElectionModal, election)">
+                                <mat-icon>edit</mat-icon>
+                                <span>Modifier</span>
+                            </button>
+                            <button mat-menu-item (click)="deleteElection(election.id)">
+                                <mat-icon>delete</mat-icon>
+                                <span>Supprimer</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-head-bg"></tr>
+                <tr mat-row *matRowDef="let emprow; columns: displayedColumns"></tr>
+            </table>
+
+            <span *ngIf="dataSource?.payload?.length == 0" class="paginate text-danger mt-4">Les critères de recherche
+                tels qu'énoncés ne correspondent à aucun election</span>
+
+            <div class="paginate">
+                <ngb-pagination [collectionSize]="dataSource?.metadata?.totalElements" [page]="pageOptions.page+1"
+                    [pageSize]="pageOptions.size" [maxSize]="5" (pageChange)="paginate($event)" size="sm"
+                    [rotate]="true" [ellipses]="true" [boundaryLinks]="true">
+                </ngb-pagination>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- search election -->
+<ng-template #SearchElectionModal let-modal>
+    <div class="modal-header bg-special">
+        <h5 class="modal-title" id="exampleModalLabel">Rechercher des Elections</h5>
+        <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
+    </div>
+    <div class="modal-body">
+        <app-add-election (search)="doSearch($event)" [services]="services?.payload" [isSearch]="true" (submit)="close()"></app-add-election>
+    </div>
+</ng-template>
+<!-- search election -->
+
+<!--Add election-->
+<ng-template #addElectionModal let-modal>
+    <div class="modal-header bg-special">
+        <h5 class="modal-title" id="exampleModalLabel">Ajout d'une Election</h5>
+        <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
+    </div>
+    <div class="modal-body">
+        <app-add-election [isSearch]="false" [services]="services?.payload" (submit)="close()"></app-add-election>
+    </div>
+</ng-template>
+<!--End Add election-->
+
+<!--Edit election-->
+    <ng-template #EditElectionModal let-modal>
+        <div class="modal-header bg-special">
+            <h5 class="modal-title" id="exampleModalLabel">Modifier un Election</h5>
+            <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
+        </div>
+        <div class="modal-body">
+            <app-edit-election [services]="services?.payload" (submit)="close()" [electionToUpdate]="electionToUpdate"></app-edit-election>
+        </div> 
+    </ng-template>
+<!--End Edit election-->

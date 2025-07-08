@@ -1,0 +1,79 @@
+<section *ngIf="!isSearch">   
+    <form [formGroup]="form" class="row">
+        <div class="mb-3 col-md-12 mb-3">
+            <label class="form-label">Matricul du candidat <small style="color: red;">*</small></label>
+            <ng-select 
+                [items]="candidats?.payload"
+                bindLabel="name"
+                bindValue="id"
+                placeholder="Selectionner..."
+                formControlName="candidatId">
+            </ng-select>
+        </div>
+    
+        <div class="col-md-6">
+            <label class="form-label">Choix de l'election <small style="color: red;">*</small></label>
+            <ng-select 
+                [items]="elections?.payload"
+                bindLabel="name"
+                bindValue="id"
+                placeholder="Selectionner..."
+                formControlName="electionId">
+            </ng-select>
+        </div>
+        <div class="col-md-6">
+            <label for="date_postule" class="form-label">Date de postulation<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="date_postule" placeholder="Date de postulation" formControlName="date_postule">
+        </div>
+    
+        <div class="mt-3">
+          <label for="desc" class="form-label">Description</label>
+          <textarea id="desc"  class="form-control form-control-lg" placeholder="Decrivez le le candidat ici..." formControlName="description"></textarea>
+        </div>
+    </form>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="create()" [disabled]="!form.valid">Enregistrer</button>
+    </div>
+</section>
+
+<section *ngIf="isSearch">   
+    <form [formGroup]="form" class="row">
+        <div class="mb-3 col-md-12 mb-3">
+            <label class="form-label">Matricul du candidat <small style="color: red;">*</small></label>
+            <ng-select 
+                [items]="candidats?.payload"
+                bindLabel="name"
+                bindValue="id"
+                placeholder="Selectionner..."
+                formControlName="candidatId">
+            </ng-select>
+        </div>
+    
+        <div class="col-md-6">
+            <label class="form-label">Choix de l'election <small style="color: red;">*</small></label>
+            <ng-select 
+                [items]="elections?.payload"
+                bindLabel="name"
+                bindValue="id"
+                placeholder="Selectionner..."
+                formControlName="electionId">
+            </ng-select>
+        </div>
+        <div class="col-md-6">
+            <label for="date_postule" class="form-label">Date de postulation<small style="color: red;">*</small></label>
+            <input type="date" class="form-control form-control-lg" id="date_postule" placeholder="Date de postulation" formControlName="date_postule">
+        </div>
+    
+        <div class="mt-3">
+          <label for="desc" class="form-label">Description</label>
+          <textarea id="desc"  class="form-control form-control-lg" placeholder="Decrivez le le candidat ici..." formControlName="description"></textarea>
+        </div>
+    </form>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+        <button type="button" class="btn btn-primary" (click)="doSearch()">Rechercher</button>
+    </div>
+</section>
+  

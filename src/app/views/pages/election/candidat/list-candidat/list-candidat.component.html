@@ -2,18 +2,18 @@
 
     <!-- Breadcrumb à gauche -->
     <nav class="page-breadcrumb gap-2 d-flex flex-column mb-4 col-md-6">
-        <h2>Employe</h2>
-        <p>L'ensemble des employes de l'entreprise</p>
+        <h2>Candidat</h2>
+        <p>L'ensemble des candidats de l'entreprise</p>
     </nav>
 
 
     <!-- Boutons à droite -->
     <div class="d-flex justify-content-end align-items-center gap-2 col-md-6">
-        <button type="button" class="btn btn-secondary btn-icon me-2" (click)="openAddEmploye(SearchEmployeModal)">
+        <button type="button" class="btn btn-secondary btn-icon me-2" (click)="openAddCandidat(SearchCandidatModal)">
             <i class="feather icon-search"></i>
         </button>
-        <button type="button" class="btn border-0 btn-primary bg-special btn-icon-text d-flex align-items-center gap-2" (click)="openAddEmploye(addEmployeModal)">
-            <i class="feather icon-plus-circle"></i> Nouvel employe
+        <button type="button" class="btn border-0 btn-primary bg-special btn-icon-text d-flex align-items-center gap-2" (click)="openAddCandidat(addCandidatModal)">
+            <i class="feather icon-plus-circle"></i> Nouveau candidat
         </button>
     </div>
 
@@ -25,54 +25,45 @@
             <!-- <app-spinner *ngIf="loadingIndicator" [displayedColumns]="displayedColumns"></app-spinner> -->
 
             <table mat-table [dataSource]="dataSource?.payload" class="w-100">
-                <ng-container matColumnDef="matricul">
-                    <th mat-header-cell *matHeaderCellDef class="table-head-text bg-special" style="min-width:100px;"> Matricule </th>
-                    <td mat-cell *matCellDef="let employe" class="text-left"> {{employe?.matricul}} </td>
-                </ng-container>
-
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef class="table-head-text bg-special" style="min-width:100px;"> Nomtcompler</th>
-                    <td mat-cell *matCellDef="let employe" class="text-left"> {{employe?.name + " " + employe?.surname}} </td>
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text bg-special" style="min-width:100px;"> Nom du candidat </th>
+                    <td mat-cell *matCellDef="let candidat" class="text-left"> {{candidat?.name}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="phone">
-                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
-                        contact </th>
-                    <td mat-cell *matCellDef="let employe" class="text-center"> {{employe?.phone}} </td>
+                <ng-container matColumnDef="electionName">
+                    <th mat-header-cell *matHeaderCellDef class="table-head-text text bg-special" style="min-width:100px;">
+                        Election </th>
+                    <td mat-cell *matCellDef="let candidat" class="text-left"> <span>{{candidat?.electionName}} </span>
+                    </td>
                 </ng-container>
 
-                <ng-container matColumnDef="poste">
+                <ng-container matColumnDef="nbrVote">
                     <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
-                        Poste </th>
-                    <td mat-cell *matCellDef="let employe" class="text-center"> {{employe?.poste}} </td>
+                        Voies </th>
+                    <td mat-cell *matCellDef="let candidat" class="text-center"> {{candidat?.nbrVote}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="salaire">
+                <ng-container matColumnDef="date_postule">
                     <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
-                        Salaire </th>
-                    <td mat-cell *matCellDef="let employe" class="text-center"> {{employe?.salaire}} </td>
+                        Date postule </th>
+                    <td mat-cell *matCellDef="let candidat" class="text-center"> {{candidat?.date_postule}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="serviceName">
-                    <th mat-header-cell *matHeaderCellDef class="table-head-text text-center bg-special" style="min-width:50px;">
-                        Departement </th>
-                    <td mat-cell *matCellDef="let employe" class="text-center"> {{employe?.serviceName}} </td>
-                </ng-container>
 
                 <!-- <app-list-contrat></app-list-contrat> -->
                 <ng-container matColumnDef="actions" stickyEnd>
                     <th mat-header-cell *matHeaderCellDef class="table-head-text bg-special" style="min-width:0px;">
                         Actions </th>
-                    <td mat-cell *matCellDef="let employe">
+                    <td mat-cell *matCellDef="let candidat">
                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                             <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                            <button mat-menu-item (click)="openEditEmploye(EditEmployeModal, employe)">
+                            <button mat-menu-item (click)="openEditCandidat(EditCandidatModal, candidat)">
                                 <mat-icon>edit</mat-icon>
                                 <span>Modifier</span>
                             </button>
-                            <button mat-menu-item (click)="deleteEmploye(employe.id)">
+                            <button mat-menu-item (click)="deleteCandidat(candidat.id)">
                                 <mat-icon>delete</mat-icon>
                                 <span>Supprimer</span>
                             </button>
@@ -85,7 +76,7 @@
             </table>
 
             <span *ngIf="dataSource?.payload?.length == 0" class="paginate text-danger mt-4">Les critères de recherche
-                tels qu'énoncés ne correspondent à aucun employe</span>
+                tels qu'énoncés ne correspondent à aucun candidat</span>
 
             <div class="paginate">
                 <ngb-pagination [collectionSize]="dataSource?.metadata?.totalElements" [page]="pageOptions.page+1"
@@ -97,38 +88,38 @@
     </div>
 </div>
 
-<!-- search employe -->
-<ng-template #SearchEmployeModal let-modal>
+<!-- search candidat -->
+<ng-template #SearchCandidatModal let-modal>
     <div class="modal-header bg-special">
-        <h5 class="modal-title" id="exampleModalLabel">Rechercher des Employes</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Rechercher des Candidats</h5>
         <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
     </div>
     <div class="modal-body">
-        <app-add-employe (search)="doSearch($event)" [services]="services?.payload" [isSearch]="true" (submit)="close()"></app-add-employe>
+        <app-add-candidat (search)="doSearch($event)" [isSearch]="true" (submit)="close()"></app-add-candidat>
     </div>
 </ng-template>
-<!-- search employe -->
+<!-- search candidat -->
 
-<!--Add employe-->
-<ng-template #addEmployeModal let-modal>
+<!--Add candidat-->
+<ng-template #addCandidatModal let-modal>
     <div class="modal-header bg-special">
-        <h5 class="modal-title" id="exampleModalLabel">Ajout d'une Employe</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajout d'un Candidat</h5>
         <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
     </div>
     <div class="modal-body">
-        <app-add-employe [isSearch]="false" [services]="services?.payload" (submit)="close()"></app-add-employe>
+        <app-add-candidat [isSearch]="false" (submit)="close()"></app-add-candidat>
     </div>
 </ng-template>
-<!--End Add employe-->
+<!--End Add candidat-->
 
-<!--Edit employe-->
-    <ng-template #EditEmployeModal let-modal>
+<!--Edit candidat-->
+    <ng-template #EditCandidatModal let-modal>
         <div class="modal-header bg-special">
-            <h5 class="modal-title" id="exampleModalLabel">Modifier un Employe</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Modifier un Candidat</h5>
             <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
         </div>
         <div class="modal-body">
-            <app-edit-employe [services]="services?.payload" (submit)="close()" [employeToUpdate]="employeToUpdate"></app-edit-employe>
+            <app-edit-candidat [elections]="elections?.payload" (submit)="close()" [candidatToUpdate]="candidatToUpdate"></app-edit-candidat>
         </div> 
     </ng-template>
-<!--End Edit employe-->
+<!--End Edit candidat-->

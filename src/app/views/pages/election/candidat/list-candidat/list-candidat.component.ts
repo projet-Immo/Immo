@@ -1,52 +1,47 @@
 import { Component, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CandidatService } from 'src/app/services/candidat/candidat.service';
 import { ElectionService } from 'src/app/services/election/election.service';
-import { ServiceService } from 'src/app/services/service/service.service';
 import { Alertes } from 'src/app/util/alerte';
-import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-list-election',
-  templateUrl: './list-election.component.html',
-  styleUrls: ['./list-election.component.scss']
+  selector: 'app-list-candidat',
+  templateUrl: './list-candidat.component.html',
+  styleUrls: ['./list-candidat.component.scss']
 })
-export class ListElectionComponent {
+export class ListCandidatComponent {
 
   displayedColumns: string[] = [
     'name',
-    'status',
-    'serviceName',
-    'nbrVotant',
+    'electionName',
     'nbrVote',
-    'candidat',
-    'dateDebut',
-    'link',
+    'date_postule',
+    // 'dateFin',
     'actions'
   ];
   
-  electionToUpdate:any
+  candidatToUpdate:any
   pageOptions: any = { paze: 0, size: 10, sort: "DESC"};
-  elections: any;
+  candidats: any;
   dataSource: any;
-  services: any;
+  elections: any;
   loadingIndicator = true;
-  electionNumberCode = environment.electionNumberCode
 
   constructor(
-    private modalService: NgbModal,
+    private modalElection: NgbModal,
+    private candidatService : CandidatService,
     private electionService : ElectionService,
-    private serviceService : ServiceService,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
+    this.getAllCandidats();
     this.getAllElections();
-    this.getAllServices();
   }
 
-  getAllElections() {
-      this.electionService.getAllElections(this.pageOptions).subscribe(
+  getAllCandidats() {
+      this.candidatService.getAllCandidats(this.pageOptions).subscribe(
       {
         next: response => {
           // console.log('response',response);
@@ -66,11 +61,11 @@ export class ListElectionComponent {
   }
 
   
-  getAllServices() {
-    this.serviceService.getAllServices(this.pageOptions).subscribe(
+  getAllElections() {
+    this.electionService.getAllElections(this.pageOptions).subscribe(
     {
       next: response => {
-        this.services = response;
+        this.elections = response;
       },
       error: err => {
         console.log(err);
@@ -82,37 +77,37 @@ export class ListElectionComponent {
   paginate($event: any) {
     this.loadingIndicator = true;
     this.pageOptions.page = $event - 1;
-    this.getAllElections();
+    this.getAllCandidats();
   }
 
-  openAddElection(content: TemplateRef<any>) {
+  openAddCandidat(content: TemplateRef<any>) {
     this.openModal(content, 'lg');
   }
 
-  openEditElection(content: TemplateRef<any>, election: any) {
-    this.electionToUpdate = election
-    // console.log("this.electionToUpdate",this.electionToUpdate);
+  openEditCandidat(content: TemplateRef<any>, candidat: any) {
+    this.candidatToUpdate = candidat
+    // console.log("this.candidatToUpdate",this.candidatToUpdate);
     
     this.openModal(content, 'lg');
   }
 
-  DeleteElection(election: any) {
-    Alertes.confirmAction("Voulez-vous supprimer ?", "Ce election sera supprimé", () => {
-      this.deleteElection(election);
+  DeleteCandidat(candidat: any) {
+    Alertes.confirmAction("Voulez-vous supprimer ?", "Ce candidat sera supprimé", () => {
+      this.deleteCandidat(candidat);
     })
   }
 
   openModal(content: TemplateRef<any>, size: any) {
-    this.modalService.open(content, {size: size, backdrop: 'static'}).result.then((result) => {
+    this.modalElection.open(content, {size: size, backdrop: 'static'}).result.then((result) => {
     }).catch((res) => {});
   }
 
-  deleteElection(election: any) {
+  deleteCandidat(candidat: any) {
     Alertes.confirmAction(
       'Voulez-vous supprimé ?',
       'Cet element sera definitivement supprimé',
       () => {
-    this.electionService.deleteElection(election).subscribe({
+    this.candidatService.deleteCandidat(candidat).subscribe({
       next: (value) => {
         Alertes.alerteAddSuccess('Suppression reussie');
       },
@@ -120,7 +115,7 @@ export class ListElectionComponent {
         Alertes.alerteAddDanger(value.error.message);
       },
       complete: () => {
-        this.getAllElections();
+        this.getAllCandidats();
       },
     });
   })
@@ -128,8 +123,8 @@ export class ListElectionComponent {
 
 
   close(){
-    this.modalService.dismissAll();
-    this.getAllElections();
+    this.modalElection.dismissAll();
+    this.getAllCandidats();
   }
 
   doSearch(data: any) {
@@ -137,7 +132,7 @@ export class ListElectionComponent {
     this.pageOptions.page = 0;
     this.pageOptions.size = 20;
     // console.log("filtres ", this.pageOptions)
-    this.getAllElections();
-    this.modalService.dismissAll();
+    this.getAllCandidats();
+    this.modalElection.dismissAll();
   }
 }

@@ -26,7 +26,10 @@ export class ElectionService {
    getAllElections(req?: any): Observable<any> {
     let parametres: HttpParams = new HttpParams()
     if(req){
-          
+      
+      if(req?.name != undefined && req?.name){
+        parametres = parametres.append("name", req?.name);
+      }
       return this.http.get<any>(
         `${environment.baseUrl}elections/all?page=${req?.page}&size=${req?.size}`,{
           params: parametres

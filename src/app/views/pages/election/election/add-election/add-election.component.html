@@ -1,1 +1,113 @@
-<p>add-election works!</p>
+<section *ngIf="!isSearch">   
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="row col-sm-12">
+                <div class="mb-3 col-md-6"> 
+                    <label for="nom" class="form-label">Nom de l'election<small style="color: red;">*</small></label>
+                    <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom du de l'election" formControlName="name">
+                </div>
+    
+                <div class="mb-3 col-md-6">
+                    <label class="form-label">Departement <small style="color: red;">*</small></label>
+                    <ng-select 
+                        [items]="services"
+                        bindLabel="name"
+                        bindValue="id"
+                        placeholder="Selectionner..."
+                        formControlName="serviceId">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row col-md-12">
+            <div class="col-sm-4">
+                <label class="form-label">Statut de l'election <small style="color: red;">*</small></label>
+                <ng-select 
+                    [items]="status"
+                    bindLabel="description"
+                    bindValue="name"
+                    placeholder="Selectionner..."
+                    formControlName="status">
+                </ng-select>
+            </div>
+            <div class="col-sm-4">
+                <label for="dateDebut" class="form-label">Date de debut<small style="color: red;">*</small></label>
+                <input type="date" class="form-control form-control-lg" id="dateDebut" placeholder="Date de debut" formControlName="dateDebut">
+            </div>
+            <div class="col-sm-4">
+                <label for="dateFin" class="form-label">Date de fin<small style="color: red;">*</small></label>
+                <input type="date" class="form-control form-control-lg" id="dateFin" placeholder="Date de fin" formControlName="dateFin">
+            </div>
+        </div>
+        
+        <div class="col-sm-12">
+            <div class="mb-3">
+              <label for="desc" class="form-label">Description de l'election</label>
+              <textarea id="desc"  class="form-control form-control-lg" placeholder="Decrivez le service ici..." formControlName="description"></textarea>
+            </div>
+        </div>
+    </form>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="create()" [disabled]="!form.valid">Enregistrer</button>
+    </div>
+</section>
+
+<section *ngIf="isSearch">   
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="row col-sm-12">
+                <div class="mb-3 col-md-6"> 
+                    <label for="nom" class="form-label">Nom de l'election<small style="color: red;">*</small></label>
+                    <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom du de l'election" formControlName="name">
+                </div>
+    
+                <div class="mb-3 col-md-6">
+                    <label class="form-label">Departement <small style="color: red;">*</small></label>
+                    <ng-select 
+                        [items]="services"
+                        bindLabel="name"
+                        bindValue="id"
+                        placeholder="Selectionner..."
+                        formControlName="serviceId">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row col-md-12">
+            <div class="col-sm-4">
+                <label class="form-label">Statut de l'election <small style="color: red;">*</small></label>
+                <ng-select 
+                    [items]="status"
+                    bindLabel="description"
+                    bindValue="name"
+                    placeholder="Selectionner..."
+                    formControlName="status">
+                </ng-select>
+            </div>
+            <div class="col-sm-4">
+                <label for="dateDebut" class="form-label">Date de debut<small style="color: red;">*</small></label>
+                <input type="date" class="form-control form-control-lg" id="dateDebut" placeholder="Date de debut" formControlName="dateDebut">
+            </div>
+            <div class="col-sm-4">
+                <label for="dateFin" class="form-label">Date de fin<small style="color: red;">*</small></label>
+                <input type="date" class="form-control form-control-lg" id="dateFin" placeholder="Date de fin" formControlName="dateFin">
+            </div>
+        </div>
+        
+        <div class="col-sm-12">
+            <div class="mb-3">
+              <label for="desc" class="form-label">Description de l'election</label>
+              <textarea id="desc"  class="form-control form-control-lg" placeholder="Decrivez le service ici..." formControlName="description"></textarea>
+            </div>
+        </div>
+    </form>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+        <button type="button" class="btn btn-primary" (click)="doSearch()">Rechercher</button>
+    </div>
+</section>
+  
