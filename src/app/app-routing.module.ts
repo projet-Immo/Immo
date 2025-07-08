@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from './views/layout/base/base.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { ErrorPageComponent } from './views/pages/error-page/error-page.component';
+import { FormVoteComponent } from './views/pages/election/election/form-vote/form-vote.component';
 
 // const routes: Routes = [
 //   { path:'', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },
@@ -17,6 +18,10 @@ import { ErrorPageComponent } from './views/pages/error-page/error-page.componen
 
 const routes: Routes = [
   { path:'', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },
+  { 
+    path:'election/vote/form/:electionCode',
+    component: FormVoteComponent,
+  },
 
   {
     path: 'admin',
@@ -31,6 +36,10 @@ const routes: Routes = [
         path: 'rse',
         loadChildren: () => import('./views/pages/rse/rse.module').then(m => m.RSEModule)
       },
+      {
+        path: 'election',
+        loadChildren: () => import('./views/pages/election/election.module').then(m => m.ElectionModule)
+      },
     ]
   },
   {
@@ -42,6 +51,10 @@ const routes: Routes = [
       'desc': 'Oopps!! The page you were looking for doesn\'t exist.'
     }
   },
+  // { 
+  //     path:'/election/vote/form/:electionCode',
+  //     component: FormVoteComponent,
+  //   },
   {
     path: 'error/:type',
     component: ErrorPageComponent

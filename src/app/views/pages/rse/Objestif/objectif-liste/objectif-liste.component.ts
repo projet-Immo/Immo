@@ -100,7 +100,7 @@ loadObjectifs(): void {
         // ✅ Pour chaque objectif, récupérer le nom du projet si pas déjà fait
         this.objectifs.forEach(obj => {
           if (obj.projetId && !this.projetsMap[obj.projetId]) {
-            this.projetService.getProjetById(obj.projetId).subscribe({
+            this.projetService.getProjetId(obj.projetId).subscribe({
               next: (projet) => {
                 this.projetsMap[obj.projetId] = projet.name;
               },

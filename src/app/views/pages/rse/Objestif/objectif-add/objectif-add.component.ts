@@ -1,18 +1,29 @@
+<<<<<<< HEAD
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ObjectifService } from 'src/app/services/objectif/objectif.service';
 import { ProjetService } from 'src/app/services/projet/projet.service'; // <-- AJOUT
+=======
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ObjectifService } from 'src/app/services/objectif/objectif.service';
+>>>>>>> master
 
 @Component({
   selector: 'app-objectif-add',
   templateUrl: './objectif-add.component.html',
   styleUrls: ['./objectif-add.component.scss']
 })
+<<<<<<< HEAD
 export class ObjectifAddComponent implements OnInit {
+=======
+export class ObjectifAddComponent {
+>>>>>>> master
 
   @Input() isSearch: boolean = false;
   @Output() search = new EventEmitter<any>();
   @Output() submit = new EventEmitter<any>();
+<<<<<<< HEAD
   @Input() projetId: number | null = null;
 
   form: FormGroup;
@@ -35,6 +46,19 @@ export class ObjectifAddComponent implements OnInit {
       projetId: [null, Validators.required]
     });
   }
+=======
+ @Input() projetId: number | null = null;
+  form: FormGroup;
+  isOldChecked = false;
+  objectifForm: any;
+  projets: any[] = [];
+
+
+  constructor(
+    private fb: FormBuilder,
+    private objectifService: ObjectifService
+  ) {}
+>>>>>>> master
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -45,6 +69,7 @@ export class ObjectifAddComponent implements OnInit {
       dateFinPrevue: ['', Validators.required],
       dateDebutReelle: [null],
       dateFinReelle: [null],
+<<<<<<< HEAD
       projetId: [this.projetId]
     });
     
@@ -63,6 +88,10 @@ this.projetService.getAllProjets().subscribe({
   error: (err) => console.error('Erreur chargement projets', err)
 });
 
+=======
+      projetId: [this.projetId] // ✅ Utilise projetId direct
+    });
+>>>>>>> master
   }
 
   toggleOldDates() {
@@ -79,6 +108,12 @@ this.projetService.getAllProjets().subscribe({
     if (this.form.invalid) return;
 
     const payload = { ...this.form.value };
+<<<<<<< HEAD
+=======
+    // ✅ Vérifie dates : format yyyy-MM-dd
+    // Ton backend attend String pour DTO, donc c'est OK
+
+>>>>>>> master
     this.objectifService.createObjectifs(payload).subscribe({
       next: () => this.submit.emit(),
       error: (err) => console.error('Erreur création objectif:', err)
@@ -93,6 +128,7 @@ this.projetService.getAllProjets().subscribe({
     this.submit.emit();
   }
 
+<<<<<<< HEAD
   onSearch() {
     const criteria = {
       typeObjectif: this.objectifForm.value.typeObjectif,
@@ -101,4 +137,15 @@ this.projetService.getAllProjets().subscribe({
     };
     this.search.emit(criteria);
   }
+=======
+
+  onSearch() {
+  const criteria = {
+    typeObjectif: this.objectifForm.value.typeObjectif,
+    dateDebut: this.objectifForm.value.dateDebut,
+    dateFin: this.objectifForm.value.dateFin
+  };
+  this.search.emit(criteria);
+}
+>>>>>>> master
 }

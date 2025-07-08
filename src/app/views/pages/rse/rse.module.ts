@@ -22,6 +22,10 @@ import { ObjectifDetailsComponent } from './Objestif/objectif-details/objectif-d
   declarations: [
   
     ListProjetComponent,
+      AddProjetComponent,
+      SuiviProjetComponent,
+      ListProjetComponent,
+      EditProjetComponent,
        AddProjetComponent,
        SuiviProjetComponent,
        ObjectifListeComponent,

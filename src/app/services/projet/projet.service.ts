@@ -11,11 +11,6 @@ export class ProjetService {
 
   constructor(protected http : HttpClient) { }
 
-  
-  getProjetById(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.baseUrl}projets/${id}`);
-  }
-
   createProjet(projet:any):Observable<any>{
     return this.http.post<any>(`${environment.baseUrl}projets`,projet)
 

@@ -9,7 +9,6 @@ const routes: Routes = [
   {path: 'projets', component: ListProjetComponent},
   {path: 'projet/:projetName', component: SuiviProjetComponent},
   {path: 'objectifs', component: ObjectifListeComponent},
-
 ];
 
 @NgModule({
