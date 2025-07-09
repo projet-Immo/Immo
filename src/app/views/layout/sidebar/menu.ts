@@ -40,7 +40,7 @@ export const MENU: MenuItem[] = [
     link: '/admin/election/employes'
   },
   {
-    label: 'Service',
+    label: 'Departements',
     icon: 'settings',
     link: '/admin/election/services'
   },
