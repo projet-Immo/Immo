@@ -1,5 +1,4 @@
 <!-- BREADCRUMB + ACTION BUTTONS -->
-<<<<<<< HEAD
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin mb-1">
   <!-- Breadcrumb à gauche -->
   <nav class="page-breadcrumb cursor-pointer">
@@ -19,101 +18,46 @@
       <i class="feather icon-plus-circle"></i> Nouvel Objectif
     </button>
   </div>
-=======
-<div  *ngIf="isObjectifOption" class="row flex-wrap grid-margin mb-1 align-items-start">
-
-  <!-- Breadcrumb à gauche -->
-  <nav class="page-breadcrumb gap-2 d-flex flex-column mb-4 col-md-6">
-      <h2>Objectifs</h2>
-      <p>L'ensemble de vos objectifs dans le cadre RSE</p>
-  </nav>
-
-  <!-- Boutons à droite -->
-  <div class="d-flex justify-content-end align-items-center gap-2 col-md-6">
-      <button type="button" class="btn btn-secondary btn-icon me-2" (click)="openSearchObjectif(SearchObjectifModal)">
-          <i class="feather icon-search"></i>
-      </button>
-      <button type="button" class="btn border-0 btn-primary bg-special btn-icon-text d-flex align-items-center gap-2" (click)="openAddObjectif(AddObjectifModal)">
-          <i class="feather icon-plus-circle"></i> Nouvel objectif
-      </button>
-  </div>
-
-</div>
-
-
-<div *ngIf="!isObjectifOption" class="d-flex justify-content-end align-items-center gap-2">
-  <button type="button" class="btn btn-secondary btn-icon me-2" (click)="openSearchObjectif(SearchObjectifModal)">
-    <i class="feather icon-search"></i>
-  </button>
-  <button type="button" class="btn btn-primary btn-icon-text d-flex bg-special align-items-center gap-2" (click)="openAddObjectif(AddObjectifModal)">
-    <i class="feather icon-plus-circle"></i> Nouvel Objectif
-  </button>
->>>>>>> master
 </div>
 
 <!-- TABLE CARD -->
 <div class="card mt-4" style="width: 100%;">
   <div class="card-body p-0" style="width: 100%;">
-<<<<<<< HEAD
     <section class="table-container mat-elevation-z8" tabindex="0" style="width: 100%; overflow-x: auto;">
-=======
-    <section class="table-container" tabindex="0" style="width: 100%; overflow-x: auto;">
->>>>>>> master
       <table mat-table [dataSource]="objectifs" class="w-100">
 
         <!-- ID -->
         <ng-container matColumnDef="id">
-<<<<<<< HEAD
           <th mat-header-cell *matHeaderCellDef  class="table-head-text header-blue" style="min-width:50px;">ID</th>
-=======
-          <th mat-header-cell *matHeaderCellDef  class=" table-head-text bg-special" style="min-width:50px;">ID</th>
->>>>>>> master
           <td mat-cell *matCellDef="let objectif"> {{ objectif.id }} </td>
         </ng-container>
 
         <!-- Libellé -->
         <ng-container matColumnDef="libelle">
-<<<<<<< HEAD
           <th mat-header-cell *matHeaderCellDef class="table-head-text header-blue" style="min-width:100px;">Libellé</th>
-=======
-          <th mat-header-cell *matHeaderCellDef class="  table-head-text bg-special" style="min-width:100px;">Libellé</th>
->>>>>>> master
           <td mat-cell *matCellDef="let objectif"> {{ objectif.libelle }} </td>
         </ng-container>
 
         <!-- Description -->
         <ng-container matColumnDef="description">
-<<<<<<< HEAD
           <th mat-header-cell *matHeaderCellDef class="table-head-text header-blue" style="min-width:150px;">Description</th>
-=======
-          <th mat-header-cell *matHeaderCellDef class="  table-head-text bg-special" style="min-width:150px;">Description</th>
->>>>>>> master
           <td mat-cell *matCellDef="let objectif"> {{ objectif.description }} </td>
         </ng-container>
 
         <!-- Type -->
         <ng-container matColumnDef="typeObjectif">
-<<<<<<< HEAD
           <th mat-header-cell *matHeaderCellDef class="table-head-text header-blue" style="min-width:80px;">Type</th>
-=======
-          <th mat-header-cell *matHeaderCellDef class="  table-head-text bg-special" style="min-width:80px;">Type</th>
->>>>>>> master
           <td mat-cell *matCellDef="let objectif"> {{ objectif.typeObjectif }} </td>
         </ng-container>
 
         <!-- Date Début Prévue -->
         <ng-container matColumnDef="dateDebutPrevue">
-<<<<<<< HEAD
           <th mat-header-cell *matHeaderCellDef class="table-head-text text-center header-blue" style="min-width:120px;">Date Début</th>
-=======
-          <th mat-header-cell *matHeaderCellDef class="  table-head-text text-center bg-special" style="min-width:120px;">Date Début</th>
->>>>>>> master
           <td mat-cell *matCellDef="let objectif" class="text-center"> {{ objectif.dateDebutPrevue | date }} </td>
         </ng-container>
 
         <!-- Date Fin Prévue -->
         <ng-container matColumnDef="dateFinPrevue">
-<<<<<<< HEAD
           <th mat-header-cell *matHeaderCellDef class="table-head-text text-center header-blue" style="min-width:120px;">Date Fin</th>
           <td mat-cell *matCellDef="let objectif" class="text-center"> {{ objectif.dateFinPrevue | date }} </td>
         </ng-container>
@@ -140,34 +84,6 @@
 
         <ng-container matColumnDef="actions" stickyEnd>
           <th mat-header-cell *matHeaderCellDef class="table-head-text header-blue" style="min-width:80px;">Actions</th>
-=======
-          <th mat-header-cell *matHeaderCellDef class="  table-head-text text-center bg-special" style="min-width:120px;">Date Fin</th>
-          <td mat-cell *matCellDef="let objectif" class="text-center"> {{ objectif.dateFinPrevue | date }} </td>
-        </ng-container>
-
-        <!-- Date Début Réelle -->
-        <ng-container matColumnDef="dateDebutReelle">
-          <th mat-header-cell *matHeaderCellDef class="  table-head-text text-center bg-special" style="min-width:120px;">Début Réel</th>
-          <td mat-cell *matCellDef="let objectif" class="text-center"> {{ objectif.dateDebutReelle | date }} </td>
-        </ng-container>
-
-        <!-- Date Fin Réelle -->
-        <ng-container matColumnDef="dateFinReelle">
-          <th mat-header-cell *matHeaderCellDef class="  table-head-text text-center bg-special" style="min-width:120px;">Fin Réelle</th>
-          <td mat-cell *matCellDef="let objectif" class="text-center"> {{ objectif.dateFinReelle | date }} </td>
-        </ng-container>
-
-
-        <!-- Projet -->
-        <ng-container matColumnDef="projetName">
-          <th mat-header-cell *matHeaderCellDef class=" table-head-text text-center bg-special" style="min-width:80px;">Projet</th>
-          <td mat-cell *matCellDef="let objectif" class="text-center"> {{ objectif.projetName}} </td>
-        </ng-container>
-
-        <!-- Actions -->
-        <ng-container matColumnDef="actions" stickyEnd>
-          <th mat-header-cell *matHeaderCellDef class=" table-head-text bg-special" style="min-width:80px;">Actions</th>
->>>>>>> master
           <td mat-cell *matCellDef="let objectif">
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu Actions">
               <mat-icon>more_vert</mat-icon>
@@ -181,11 +97,7 @@
                 <mat-icon>edit</mat-icon>
                 <span>Modifier</span>
               </button>
-<<<<<<< HEAD
 <button mat-menu-item (click)="deleteObjectif(objectif.id)">
-=======
-              <button mat-menu-item  (click)="deleteObjectif(objectif.id)">
->>>>>>> master
                 <mat-icon>delete</mat-icon>
                 <span>Supprimer</span>
               </button>
@@ -195,21 +107,13 @@
 
        
 
-<<<<<<< HEAD
        
-=======
-        <!-- HEADER & BODY -->
->>>>>>> master
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
       </table>
 
-<<<<<<< HEAD
      
-=======
-      <!-- Message si vide -->
->>>>>>> master
       <span *ngIf="objectifs?.length === 0" class="paginate text-danger mt-4">
         Aucun objectif trouvé.
       </span>
@@ -217,25 +121,16 @@
   </div>
 </div>
 
-<<<<<<< HEAD
 <ng-template #SearchObjectifModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title">Recherche Objectif</h5>
     <button type="button" class="btn-close" (click)="modal.close()" aria-label="Close"></button>
-=======
-<!-- MODALS -->
-<ng-template #SearchObjectifModal let-modal>
-  <div class="modal-header bg-special">
-    <h5 class="modal-title">Recherche Objectif</h5>
-    <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
->>>>>>> master
   </div>
   <div class="modal-body">
     <app-objectif-add (search)="doSearch($event)" [isSearch]="true" (submit)="modal.close()"></app-objectif-add>
   </div>
 </ng-template>
 
-<<<<<<< HEAD
 <ng-template #DetailsObjectifModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title">Détails Objectif</h5>
@@ -254,16 +149,6 @@
   </div>
   <div class="modal-body">
        <app-objectif-add 
-=======
-<ng-template #AddObjectifModal let-modal>
-  <div class="modal-header bg-special">
-    <h5 class="modal-title">Ajout Objectif</h5>
-    <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
-  </div>
-  <div class="modal-body">
-    <!-- ✅ Ici tu passes le projetId s’il existe -->
-    <app-objectif-add 
->>>>>>> master
       [isSearch]="false"
       [projetId]="projetId"
       (submit)="loadObjectifs(); modal.close()">
@@ -273,7 +158,6 @@
 
 
 <ng-template #EditObjectifModal let-modal>
-<<<<<<< HEAD
   <div class="modal-header">
     <h5 class="modal-title">Modifier Objectif</h5>
     <button type="button" class="btn-close" (click)="modal.close()" aria-label="Close"></button>
@@ -288,13 +172,3 @@
   </div>
 </ng-template>
  
-=======
-  <div class="modal-header bg-special">
-    <h5 class="modal-title">Modifier Objectif</h5>
-    <mat-icon class="cursor-pointer" fontIcon="close" (click)="modal.close()"></mat-icon>
-  </div>
-  <div class="modal-body">
-    <app-objectif-edit [objectifId]="selectedObjectifId" (submit)="loadObjectifs(); modal.close()"></app-objectif-edit>
-  </div>
-</ng-template>
->>>>>>> master

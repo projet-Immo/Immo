@@ -10,11 +10,8 @@ import { ObjectifService } from 'src/app/services/objectif/objectif.service';
 export class ObjectifEditComponent {
     @Input() objectifId!: number; // ou string selon ton type
   @Output() submit = new EventEmitter<any>();
-<<<<<<< HEAD
   @Input() isSearch: boolean = false;
   @Input() projetId: number | null = null;
-=======
->>>>>>> master
 
   form!: FormGroup;
   isOldChecked = false;
@@ -76,7 +73,6 @@ export class ObjectifEditComponent {
     }
   }
 
-<<<<<<< HEAD
  update() {
   if (this.form.invalid) return;
 
@@ -94,17 +90,6 @@ export class ObjectifEditComponent {
 }
 
 
-=======
-  update() {
-    if (this.form.invalid) return;
-
-    this.objectifService.updateObjectifs(this.objectifId, this.form.value).subscribe({
-      next: () => this.submit.emit(),
-      error: (err) => console.error('Erreur modification objectif', err)
-    });
-  }
-
->>>>>>> master
   close() {
     this.submit.emit();
   }

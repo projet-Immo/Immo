@@ -11,14 +11,10 @@
         <select class="form-select" formControlName="typeObjectif">
           <option value="">Sélectionner</option>
           <option value="ENVIRONNEMENT">ENVIRONNEMENT</option>
-<<<<<<< HEAD
           <option value="SOCIAL"> SOCIAL</option>
           <option value=" GOUVERNANCE"> GOUVERNANCE</option>
           <option value="FORMATION">FORMATION</option>
         
-=======
-          <option value="QUANTITATIF">QUANTITATIF</option>
->>>>>>> master
         </select>
       </div>
 
@@ -40,20 +36,12 @@
      <!-- Si pas de projetId passé, afficher la liste déroulante -->
 <div *ngIf="!projetId">
   <label for="projet">Projet</label>
-<<<<<<< HEAD
  <select class="form-select" formControlName="projetId">
   <option value="">Sélectionner un projet</option>
   <option *ngFor="let projet of projets" [value]="projet.id">
     {{ projet.name }}
   </option>
 </select>
-=======
-  <select id="projet" formControlName="projetId" required>
-    <option *ngFor="let projet of projets" [value]="projet.id">
-      {{ projet.name }}
-    </option>
-  </select>
->>>>>>> master
 
   <!-- Si projetId fourni, on met un champ caché pour ne pas le perdre -->
 <input *ngIf="projetId" type="hidden" [value]="projetId">
