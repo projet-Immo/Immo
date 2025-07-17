@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 export class ObjectifService {
 
   constructor(protected http : HttpClient) { }
+
   getObjectifsByProjetId(projetId: number): Observable<any> {
   return this.http.get<any>(`${environment.baseUrl}objectifs/projet/${projetId}`);
 }
